@@ -7,6 +7,18 @@ import re
 artist_dict = {}
 allLyrics = {}
 
+# Creating JSON file from search
+def findArtistSongs(api, artist, maxSongs, sortBy):
+    #search = api.search_artist(artist, max_songs=maxSongs, sort=sortBy) # Select songs based on ASC order of song name
+    search = api.search_artist(artist, max_songs=maxSongs) # Random selection of songs
+
+    artistFileName = re.sub(r'[^A-Za-z0-9]+', '', artist) # Removing all alphanumeric characters from string
+    artistFile = 'Lyrics_' + artistFileName + '.json' # Lyrics file name used instead of default to ensure consistancy of file names when weird characters used
+    search.save_lyrics(artistFile,overwrite=True) # Creation JSON file overwrite=True overides JSON with same name
+    shutil.move(artistFile, "outputLyrics/"+artistFile) # Moving file as a personal perference so individuals can see JSON on git rather than deleting it
+    print('JSON Created ...')
+    return artistFile
+
 # Searching JSON file to collect song information
 def collectSongData(song):
     songInfo = list()
@@ -14,7 +26,7 @@ def collectSongData(song):
     lyrics = song['lyrics']  # Collets song lyrics
     songInfo.append((title,lyrics))
     artist_dict[title] = songInfo  # Assign list to song dictionary entry named after song title
-    return print('Json Search completed for',title,'...') # Indicates JSON search completed
+    return print('JSON Search completed for',title,'...') # Indicates JSON search completed
 
 # Updating CSV File
 def updateCSV_file(file):
@@ -42,16 +54,8 @@ def search_csv_file(file,currentElement):
                     allLyrics[keyName.upper()] = allSongs[i] # Setting key and setting it to uppercase personal preference
     return print('Element Search completed...') # Indicates element search completed
 
-def main(api, artist, maxSongs, sortBy, currentElement):
+def main(artistFile, maxSongs, currentElement):
     print('Lyrics Search started...') # Indicating algorithm started
-    #search = api.search_artist(artist, max_songs=maxSongs, sort=sortBy) # Select songs based on ASC order of song name
-    search = api.search_artist(artist, max_songs=maxSongs) # Random selection of songs
-
-    artistFileName = re.sub(r'[^A-Za-z0-9]+', '', artist) # Removing all alphanumeric characters from string
-    artistFile = 'Lyrics_' + artistFileName + '.json' # Lyrics file name used instead of default to ensure consistancy of file names when weird characters used
-    search.save_lyrics(artistFile,overwrite=True) # Creation JSON file overwrite=True overides JSON with same name
-
-    shutil.move(artistFile, "outputLyrics/"+artistFile) # Moving file as a personal perference so individuals can see JSON on git rather than deleting it
 
     Artist = json.load(open("outputLyrics/"+artistFile)) # Loading JSON file
     file = "outputLyrics/lyricsGeniusFile.csv" # File Path

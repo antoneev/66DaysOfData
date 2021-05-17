@@ -41,9 +41,13 @@ if __name__ == "__main__":
 
     # Passing each element to the lyricsGenius function 1 by 1
     for i in range(len(AllItems)):
+        # Eliminates creating the same JSON file n times
+        if i == 0:
+            artistFile = lyricsGenius.findArtistSongs(api, artist, maxSongs, sortBy)
         for j in range(len(AllItems[i])):
             currentElement = AllItems[i][j]
-            lyricsFound = lyricsGenius.main(api, artist, maxSongs, sortBy, currentElement)
+            print('\nSearching for element:', currentElement)
+            lyricsFound = lyricsGenius.main(artistFile, maxSongs, currentElement)
 
     # Displays if any lyrics were found or not
     if len(lyricsGenius.allLyrics) > 0:

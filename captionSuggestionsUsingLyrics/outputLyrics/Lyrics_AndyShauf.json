@@ -150,7 +150,7 @@
        "header_image_url": "https://s3.amazonaws.com/filepicker-images-rapgenius/gkv0vkblr1",
        "human_readable_role_for_display": "Editor",
        "id": 3264970,
-       "iq": 565355,
+       "iq": 565368,
        "login": "utdeo",
        "name": "utdeo",
        "role_for_display": "editor",
@@ -250,7 +250,7 @@
     "unreviewed_annotations": 4,
     "verified_annotations": 0,
     "hot": false,
-    "pageviews": 48921
+    "pageviews": 48942
    },
    "title": "The Magician",
    "title_with_featured": "The Magician",
@@ -638,7 +638,7 @@
     "unreviewed_annotations": 9,
     "verified_annotations": 0,
     "hot": false,
-    "pageviews": 33676
+    "pageviews": 33685
    },
    "title": "Quite Like You",
    "title_with_featured": "Quite Like You",
@@ -1062,7 +1062,7 @@
     "unreviewed_annotations": 10,
     "verified_annotations": 0,
     "hot": false,
-    "pageviews": 25458
+    "pageviews": 25467
    },
    "title": "To You",
    "title_with_featured": "To You",
@@ -1265,35 +1265,35 @@
          "api_path": "/users/4032910",
          "avatar": {
           "tiny": {
-           "url": "https://assets.genius.com/images/default_avatar_16.png?1620768272",
+           "url": "https://assets.genius.com/images/default_avatar_16.png?1621266367",
            "bounding_box": {
             "width": 16,
             "height": 16
            }
           },
           "thumb": {
-           "url": "https://assets.genius.com/images/default_avatar_32.png?1620768272",
+           "url": "https://assets.genius.com/images/default_avatar_32.png?1621266367",
            "bounding_box": {
             "width": 32,
             "height": 32
            }
           },
           "small": {
-           "url": "https://assets.genius.com/images/default_avatar_100.png?1620768272",
+           "url": "https://assets.genius.com/images/default_avatar_100.png?1621266367",
            "bounding_box": {
             "width": 100,
             "height": 100
            }
           },
           "medium": {
-           "url": "https://assets.genius.com/images/default_avatar_300.png?1620768272",
+           "url": "https://assets.genius.com/images/default_avatar_300.png?1621266367",
            "bounding_box": {
             "width": 300,
             "height": 400
            }
           }
          },
-         "header_image_url": "https://assets.genius.com/images/default_avatar_300.png?1620768272",
+         "header_image_url": "https://assets.genius.com/images/default_avatar_300.png?1621266367",
          "human_readable_role_for_display": null,
          "id": 4032910,
          "iq": 48,
