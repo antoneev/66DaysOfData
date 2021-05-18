@@ -14,7 +14,7 @@ This is done as followed:
 2.	Use similar word suggestion to suggest similar words to the objects found. This is done as “boat” may not be in a song but “yacht” maybe.
 3.	Implement the lyricgenius package which returns JSONs of songs and their lyrics. 
 4.	Searches through these lyrics to find lines where the element may be mentioned.
-5.	**How was project wrapped??**
+5.	Streamlit was used to wrap the app.
 
 ## Challenges Found when conducting this Project 🥲
 1.	Lyricgenius documentation is not the best. I was unable to find all the “sortby=” options; therefore, I did not use the option. As sortby=title gives all songs in ASC order by title. However, without the sortby= option users are given randomly selected songs.
@@ -42,3 +42,4 @@ Objects and Colors found – Runtime 23 seconds
 [Color Detection Colors.csv](https://laptrinhx.com/building-a-color-recognizer-in-python-2669297194)
 [LyricGenius GitHub](https://github.com/johnwmillr/LyricsGenius)
 [LyricGenius Download Lyrics]( https://rareloot.medium.com/how-to-download-an-artists-lyrics-from-genius-com-using-python-984d298951c6)
+[Streamlit](https://docs.streamlit.io/en/stable/)

@@ -8,16 +8,16 @@ import lyricsgenius as genius
 
 AllItems = [] # Declare variable
 
-if __name__ == "__main__":
+def main(image_file,numberOfColors,artistName,numberOfSongs):
     start = time.time() # Starting time
 
     # Initializing variables
-    img = cv.imread("imgs/image-1.jpeg")
-    colorDetection.numberOfClusters = 3
+    img = cv.imread(image_file)
+    colorDetection.numberOfClusters = numberOfColors
     similarWordSuggestion.maxReturnWords = 5
     api = genius.Genius('1M3VJ1T9KKthsOiN3BH1N9xD9BnOmKHK52b_vaCfJSQhUhRNTtDxgKjIxrvg0-DD')
-    artist = "Andy Shauf"
-    maxSongs = 3
+    artist = artistName
+    maxSongs = numberOfSongs
     sortBy = "title"
 
     colorDetection.main(img) # Calling color detection function
@@ -65,4 +65,9 @@ if __name__ == "__main__":
     print('-----Summary END--------\n')
 
     end = time.time() # Calculates end time
-    print(end - start) # Prints times in seconds
+    totalTime = (end - start)
+    print(totalTime) # Prints times in seconds
+    return totalTime
+
+if __name__ == "__main__":
+    main()
