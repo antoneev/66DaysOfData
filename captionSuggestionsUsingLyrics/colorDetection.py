@@ -64,9 +64,10 @@ def predict_color(unique_colors):
 # Returning root color if input "Alice Blue" output is "Blue"
 def return_root_color(allColorsFound):
     for i in range(len(allColorsFound)):
-        if allColorsFound not in rootColors:
-            colorOnly = allColorsFound[i].split('(')[0]  # returns color without () if any
-            rootColors.append(colorOnly.split()[-1].lower())  # returns last word or only word which is normally the root color
+        colorOnly = allColorsFound[i].split('(')[0]  # returns color without () if any
+        rootColor = colorOnly.split()[-1].lower()
+        if rootColor not in rootColors:
+            rootColors.append(rootColor)  # returns last word or only word which is normally the root color
 
 def main(img):
     print('Color Detection started...') # Indicating algorithm started

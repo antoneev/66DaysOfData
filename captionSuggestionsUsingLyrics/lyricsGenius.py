@@ -6,6 +6,7 @@ import re
 # Create an empty dictionary to store your songs and related data
 artist_dict = {}
 allLyrics = {}
+allSongTitles = []
 
 # Creating JSON file from search
 def findArtistSongs(api, artist, maxSongs, sortBy):
@@ -26,6 +27,8 @@ def collectSongData(song):
     lyrics = song['lyrics']  # Collets song lyrics
     songInfo.append((title,lyrics))
     artist_dict[title] = songInfo  # Assign list to song dictionary entry named after song title
+    if title not in allSongTitles:
+        allSongTitles.append(title)
     return print('JSON Search completed for',title,'...') # Indicates JSON search completed
 
 # Updating CSV File

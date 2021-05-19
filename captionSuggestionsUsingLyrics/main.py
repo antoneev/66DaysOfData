@@ -9,6 +9,7 @@ import lyricsgenius as genius
 AllItems = [] # Declare variable
 
 def main(image_file,numberOfColors,artistName,numberOfSongs):
+    similarWords = []
     start = time.time() # Starting time
 
     # Initializing variables
@@ -24,7 +25,7 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
     objectDetection.main(img) # Calling object detection function
 
     # Either adding color/object to allitems list or displaing no colors/objects found
-    if len(colorDetection.photoColors) > 0:
+    if len(colorDetection.rootColors) > 0:
         AllItems.append(colorDetection.rootColors)
     else:
         print("No Colors Detected")
@@ -34,8 +35,12 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
     else:
         print("No Objects Detected")
 
-    similarWordSuggestion.main() # Calling similar word suggestion
-    print(similarWordSuggestion.allSimilarWords)
+    # Adding similar words to a list then the list to overall list
+    similarWordSuggestion.main()  # Calling similar word suggestion
+    for key, value in similarWordSuggestion.allSimilarWords.items():
+        for i in range(len(value)):
+            similarWords.append(value[i])
+    AllItems.append(similarWords)
 
     print('All colors and objects found: ' + str(AllItems)) # Displaying color and objects
 
@@ -57,10 +62,11 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
 
     # Outputting summary of all elements. If no elements found empty arrays are shown.
     print('\n-----Summary START------')
-    print('Colors Found: ', colorDetection.photoColors)
+    print('Colors Found: ', colorDetection.rootColors)
     print('Objects Found: ', objectDetection.ListofObjects)
     print('Similar Words Found: ',similarWordSuggestion.allSimilarWords)
     print('All Colors and Objects Found: ', str(AllItems))
+    print('Songs Searched: ', lyricsGenius.allSongTitles)
     print('All Lyrics Found: ', lyricsGenius.allLyrics)
     print('-----Summary END--------\n')
 
