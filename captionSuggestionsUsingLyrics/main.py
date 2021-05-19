@@ -49,16 +49,23 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
         # Eliminates creating the same JSON file n times
         if i == 0:
             artistFile = lyricsGenius.findArtistSongs(api, artist, maxSongs, sortBy)
+            if artistFile == 'Timeout: Request timed out: HTTPSConnectionPool':
+                break
         for j in range(len(AllItems[i])):
             currentElement = AllItems[i][j]
             print('\nSearching for element:', currentElement)
-            lyricsFound = lyricsGenius.main(artistFile, maxSongs, currentElement)
+            lyricsGenius.main(artistFile, maxSongs, currentElement)
 
     # Displays if any lyrics were found or not
-    if len(lyricsGenius.allLyrics) > 0:
+    if artistFile == 'Timeout: Request timed out: HTTPSConnectionPool':
+        print('Lyrics Genius Timed Out')
+        artistSession = 'Timed Out'
+    elif len(lyricsGenius.allLyrics) > 0:
         print(lyricsGenius.allLyrics)
+        artistSession = 'Complete'
     else:
         print("No Lyrics Found. Please try another image or artist.")
+        artistSession = 'No Lyrics Found'
 
     # Outputting summary of all elements. If no elements found empty arrays are shown.
     print('\n-----Summary START------')
@@ -73,7 +80,8 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
     end = time.time() # Calculates end time
     totalTime = (end - start)
     print(totalTime) # Prints times in seconds
-    return totalTime
+
+    return artistSession, totalTime
 
 if __name__ == "__main__":
     main()

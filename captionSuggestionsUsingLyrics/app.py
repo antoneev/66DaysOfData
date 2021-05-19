@@ -1,17 +1,19 @@
 import streamlit as st
 from PIL import Image
 import colorDetection
+import lyricsGenius
 import objectDetection
 import main as backend
 import os
 
 # TODO
-# Handle car returning card?
-# Handle reset
-# Clear cache
+# NLTK
 
 # Upload image
-def displayOuput():
+import similarWordSuggestion
+
+
+def displayOuput(artistSession):
     # Output Display
     st.write("# Output")
 
@@ -49,22 +51,28 @@ def displayOuput():
             for i in range(len(value)):
                 st.write('**Similar Object: **', value[i])
     else:
-        st.warning("Suggestion Word Not Ran")
+        st.warning("Word Suggestion Algorithm Not Ran")
 
     # Outputting Lyrics
     st.header("Lyrics")
 
-    st.write("### Songs Searched: ")
-    for i in backend.lyricsGenius.allSongTitles:
-        st.write(i)
+    if artistSession == 'Timed Out':
+        st.error('Lyrics Genius Timed Out. Try again!')
+    elif artistSession == 'Complete':
+        st.write("### Songs Searched: ")
+        for i in backend.lyricsGenius.allSongTitles:
+            st.write(i)
 
-    if len(backend.lyricsGenius.allLyrics) != 0:
-        st.write('### All Lyrics Found: ')
-        for i in backend.lyricsGenius.allLyrics:
-            key = i.split('_')
-            st.write('**Song:** ', key[0], '| **Element:** ', key[1], ' | **Lyrics:**',
-                     backend.lyricsGenius.allLyrics[i])
+        if len(backend.lyricsGenius.allLyrics) != 0:
+            st.write('### All Lyrics Found: ')
+            for i in backend.lyricsGenius.allLyrics:
+                key = i.split('_')
+                st.write('**Song:** ', key[0], '| **Element:** ', key[1], ' | **Lyrics:**',
+                         backend.lyricsGenius.allLyrics[i])
     else:
+        st.write("### Songs Searched: ")
+        for i in backend.lyricsGenius.allSongTitles:
+            st.write(i)
         st.warning("No Lyrics Found")
 
 def load_image(image_file):
@@ -72,7 +80,6 @@ def load_image(image_file):
     return img
 
 def main():
-    done = 0
     st.write("""
              # Caption Suggestion using Lyrics 🎶
              ## #66DaysOfData Project 1️⃣
@@ -95,8 +102,8 @@ def main():
     if st.button("Search") == True:
 
         if str(image_file) != 'None': # Verifying photo has been uploaded
-            if done == 0:
-                st.info('Algorithm is at work ...')
+            st.info('Algorithm is at work ...')
+
             # Saving file
             with open(os.path.join("outputImgs/", image_file.name), "wb") as f:
                 f.write(image_file.getbuffer())
@@ -107,16 +114,32 @@ def main():
             numberOfSongs = int(numberOfSongs)
 
             # Calling algorithm
-            totalTime = backend.main(file_path, numberOfColors, artistName, numberOfSongs)
+            artistSession, totalTime = backend.main(file_path, numberOfColors, artistName, numberOfSongs)
 
-            displayOuput()
+            # Calling display
+            displayOuput(artistSession)
 
+            # Outputting time
             st.success("Algorithm Completed in "+ str(round(totalTime, 2)) +" seconds")
-            done = 1
+
+            # Clear output button
+            st.button('Clear Output')
+
+            # Clearing all lists as streamlit caches this information
+            backend.AllItems.clear()
+            objectDetection.ListofObjects.clear()
+            colorDetection.rootColors.clear()
+            colorDetection.ListofColors.clear()
+            colorDetection.photoColors.clear()
+            lyricsGenius.allSongTitles.clear()
+            lyricsGenius.artist_dict.clear()
+            lyricsGenius.allLyrics.clear()
+            similarWordSuggestion.allSimilarWords.clear()
+
         else:
             st.error("All fields must be filled out!")
     else:
-        st.info('Please click Search button after adding the needed information.')
+        st.info('Please click the Search button after adding the needed information.')
 
 if __name__ == '__main__':
     main()

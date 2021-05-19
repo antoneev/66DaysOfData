@@ -20,6 +20,8 @@ This is done as followed:
 1.	Lyricgenius documentation is not the best. I was unable to find all the “sortby=” options; therefore, I did not use the option. As sortby=title gives all songs in ASC order by title. However, without the sortby= option users are given randomly selected songs.
 2.	cv2 had an issue loading in Jupyter notebook so I used PyCharm.
 3.	There seemed to be limited documentation on color detection when wanting to load a photo and return all colors found. Therefore, I had to use a combination of different resources. 
+4. Streamlit runs in real time. Therefore, buttons and other elements must have if-else logic tied to it, so the system does not excute. This makes having nested elements (buttons, etc.) a bit tricky. 
+5. Streamlit caches information which is great in some instances. However, this causes elements from different uploaded images to be appended together. For example, if you upload image 1 followed by image 2. Image 2 elements were being appended to those of image 1. This caused the output to be incorrect. Therefore, a clear was done of all elements at the end of the final output to the screen.
 
 ## Performance 💨
 Note: times do fluctuate

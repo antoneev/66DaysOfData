@@ -10,15 +10,19 @@ allSongTitles = []
 
 # Creating JSON file from search
 def findArtistSongs(api, artist, maxSongs, sortBy):
-    #search = api.search_artist(artist, max_songs=maxSongs, sort=sortBy) # Select songs based on ASC order of song name
-    search = api.search_artist(artist, max_songs=maxSongs) # Random selection of songs
+    try:
+        #search = api.search_artist(artist, max_songs=maxSongs, sort=sortBy) # Select songs based on ASC order of song name
+        search = api.search_artist(artist, max_songs=maxSongs) # Random selection of songs
 
-    artistFileName = re.sub(r'[^A-Za-z0-9]+', '', artist) # Removing all alphanumeric characters from string
-    artistFile = 'Lyrics_' + artistFileName + '.json' # Lyrics file name used instead of default to ensure consistancy of file names when weird characters used
-    search.save_lyrics(artistFile,overwrite=True) # Creation JSON file overwrite=True overides JSON with same name
-    shutil.move(artistFile, "outputLyrics/"+artistFile) # Moving file as a personal perference so individuals can see JSON on git rather than deleting it
-    print('JSON Created ...')
-    return artistFile
+        artistFileName = re.sub(r'[^A-Za-z0-9]+', '', artist) # Removing all alphanumeric characters from string
+        artistFile = 'Lyrics_' + artistFileName + '.json' # Lyrics file name used instead of default to ensure consistancy of file names when weird characters used
+        search.save_lyrics(artistFile,overwrite=True) # Creation JSON file overwrite=True overides JSON with same name
+        shutil.move(artistFile, "outputLyrics/"+artistFile) # Moving file as a personal perference so individuals can see JSON on git rather than deleting it
+        print('JSON Created ...')
+        return artistFile
+    except:
+        artistFile = 'Timeout: Request timed out: HTTPSConnectionPool'
+        return artistFile
 
 # Searching JSON file to collect song information
 def collectSongData(song):
@@ -49,9 +53,9 @@ def search_csv_file(file,currentElement):
     with open(file) as f_obj:
         reader = csv.reader(f_obj, delimiter=',')
         for line in reader:  # Iterates through the rows of your csv
-            allSongs = line[1].splitlines() # Split entire song into new lines to be read 1 by 1
+            allSongs= line[1].splitlines() # Split entire song into new lines to be read 1 by 1
             for i in range(len(allSongs)):
-                if currentElement in allSongs[i]: # Searching for element
+                if currentElement in allSongs[i].lower(): # Searching for element and making all lowercased for searching
                     print('Song: ',line[0],'| Lyrics: ',allSongs[i])
                     keyName = line[0] +'_'+currentElement+'_'+str(i) # Setting key to be unqiue
                     allLyrics[keyName.upper()] = allSongs[i] # Setting key and setting it to uppercase personal preference
