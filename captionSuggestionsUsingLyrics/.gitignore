@@ -1,3 +1,5 @@
 /files/*
 /__pycache__/*
 /.idea/*
+/outputLyrics/.DS_Store
+/outputImgs/.DS_Store
