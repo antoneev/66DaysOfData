@@ -1,0 +1,9 @@
+opencv-python
+lyricsgenius
+streamlit
+Pillow
+numpy
+matplotlib
+pandas
+scipy
+scikit-learn
