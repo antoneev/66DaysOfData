@@ -12,6 +12,14 @@ import similarWordSuggestion
 
 def downloadingExternalFile():
     st.info("Please wait the needed files are being retrieved. This will only happen on the initial load!")
+
+    # Create needed folders
+    path_images = "outputImgs/"
+    path_lyrics = "outputLyrics/"
+
+    os.makedirs(path_images)
+    os.makedirs(path_lyrics)
+
     loadingFiles.main()
 
 def displayOuput(artistSession):
@@ -107,8 +115,6 @@ def main():
 
             # Saving file
             with open(os.path.join("outputImgs/", image_file.name), "wb") as f:
-                path = os.path.dirname(__file__)
-                st.write(path)
                 f.write(image_file.getbuffer())
 
             file_path = "outputImgs/"+image_file.name
