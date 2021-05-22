@@ -107,9 +107,10 @@ def main():
 
             # Saving file
             with open(os.path.join("outputImgs/", image_file.name), "wb") as f:
+                path = os.path.dirname(__file__)
+                st.write(path)
                 f.write(image_file.getbuffer())
-            path = os.path.dirname(__file__)
-            st.write(path)
+
             file_path = "outputImgs/"+image_file.name
 
             # Converting numbers to pass to function
