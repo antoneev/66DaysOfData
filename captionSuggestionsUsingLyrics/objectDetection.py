@@ -9,14 +9,14 @@ classFile = 'files/coco.names'
 ListofObjects = []
 classLabels = []
 
+# Opening object labels
+with open(classFile, 'rt') as f:
+    classLabels = f.read().rstrip('\n').split('\n')
+
 def main(img):
     print('Object Detection started...') # Indicating algorithm started
 
     model = cv.dnn_DetectionModel(frozen_model,config_file) # Declaring model
-
-    # Opening object labels
-    with open(classFile,'rt') as f:
-        classLabels = f.read().rstrip('\n').split('\n')
 
     # Model config
     model.setInputSize(320,320) # Image size based on config file

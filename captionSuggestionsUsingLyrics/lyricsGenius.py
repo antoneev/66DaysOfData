@@ -7,6 +7,7 @@ import re
 artist_dict = {}
 allLyrics = {}
 allSongTitles = []
+file = "outputLyrics/lyricsGeniusFile.csv"  # File Path
 
 # Creating JSON file from search
 def findArtistSongs(api, artist, maxSongs, sortBy):
@@ -19,6 +20,14 @@ def findArtistSongs(api, artist, maxSongs, sortBy):
         search.save_lyrics(artistFile,overwrite=True) # Creation JSON file overwrite=True overides JSON with same name
         shutil.move(artistFile, "outputLyrics/"+artistFile) # Moving file as a personal perference so individuals can see JSON on git rather than deleting it
         print('JSON Created ...')
+
+        Artist = json.load(open("outputLyrics/" + artistFile))  # Loading JSON file
+
+        # Looping through each song while calling the collectSongData function
+        for i in range(maxSongs):
+            collectSongData(Artist['songs'][i])
+        updateCSV_file(file)  # Updating CSV calling updateCSV_file function
+
         return artistFile
     except:
         artistFile = 'Timeout: Request timed out: HTTPSConnectionPool'
@@ -61,17 +70,11 @@ def search_csv_file(file,currentElement):
                     allLyrics[keyName.upper()] = allSongs[i] # Setting key and setting it to uppercase personal preference
     return print('Element Search completed...') # Indicates element search completed
 
-def main(artistFile, maxSongs, currentElement):
+def main(currentElement):
     print('Lyrics Search started...') # Indicating algorithm started
 
-    Artist = json.load(open("outputLyrics/"+artistFile)) # Loading JSON file
-    file = "outputLyrics/lyricsGeniusFile.csv" # File Path
-
-    # Looping through each song while calling the collectSongData function
-    for i in range(maxSongs):
-        collectSongData(Artist['songs'][i])
-    updateCSV_file(file) # Updating CSV calling updateCSV_file function
     search_csv_file(file,currentElement) # Searching for lyrics using the search_csv_file function
+
     print('Lyrics Search completed...') # Indicating algorithm completed
 
 if __name__ == '__main__':

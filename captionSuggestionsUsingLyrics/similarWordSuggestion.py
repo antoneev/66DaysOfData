@@ -25,7 +25,7 @@ def main():
     # Passing in each object 1 by 1 using objectDetection NOT allObjects (I didn't find the need to find similar words to colors)
     for i in range(len(objectDetection.ListofObjects)):
         try:
-            similarWords = find_closest_embeddings(embeddings_dict[objectDetection.ListofObjects[i]])[1:maxReturnWords]
+            similarWords = find_closest_embeddings(embeddings_dict[objectDetection.ListofObjects[i]])[1:maxReturnWords+1]
             allSimilarWords[objectDetection.ListofObjects[i]] = similarWords
         except:
             continue

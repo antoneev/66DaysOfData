@@ -54,7 +54,7 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
         for j in range(len(AllItems[i])):
             currentElement = AllItems[i][j]
             print('\nSearching for element:', currentElement)
-            lyricsGenius.main(artistFile, maxSongs, currentElement)
+            lyricsGenius.main(currentElement)
 
     # Displays if any lyrics were found or not
     if artistFile == 'Timeout: Request timed out: HTTPSConnectionPool':

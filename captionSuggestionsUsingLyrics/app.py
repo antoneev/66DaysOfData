@@ -6,9 +6,6 @@ import objectDetection
 import main as backend
 import os
 
-# TODO
-# NLTK
-
 # Upload image
 import similarWordSuggestion
 
