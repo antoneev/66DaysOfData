@@ -5,9 +5,14 @@ import lyricsGenius
 import objectDetection
 import main as backend
 import os
+import loadingFiles
 
 # Upload image
 import similarWordSuggestion
+
+def downloadingExternalFile():
+    st.info("Please wait the needed files are being retrieved. This will only happen on the initial load!")
+    loadingFiles.main()
 
 def displayOuput(artistSession):
     # Output Display
@@ -138,4 +143,6 @@ def main():
         st.info('Please click the Search button after adding the needed information.')
 
 if __name__ == '__main__':
+    if not os.path.exists("files"):
+        downloadingExternalFile()
     main()

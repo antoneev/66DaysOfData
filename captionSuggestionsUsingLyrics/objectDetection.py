@@ -1,20 +1,20 @@
 import cv2 as cv
 
-# Initializing variables
-config_file = 'files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-frozen_model = 'files/frozen_inference_graph.pb'
-classFile = 'files/coco.names'
-
 # Declare variables
 ListofObjects = []
 classLabels = []
 
-# Opening object labels
-with open(classFile, 'rt') as f:
-    classLabels = f.read().rstrip('\n').split('\n')
-
 def main(img):
     print('Object Detection started...') # Indicating algorithm started
+
+    # Initializing variables
+    config_file = 'files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
+    frozen_model = 'files/frozen_inference_graph.pb'
+    classFile = 'files/coco.names'
+
+    # Opening object labels
+    with open(classFile, 'rt') as f:
+        classLabels = f.read().rstrip('\n').split('\n')
 
     model = cv.dnn_DetectionModel(frozen_model,config_file) # Declaring model
 

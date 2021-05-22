@@ -7,3 +7,5 @@ matplotlib
 pandas
 scipy
 scikit-learn
+dropbox
+wget

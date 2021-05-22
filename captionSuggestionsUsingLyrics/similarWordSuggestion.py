@@ -7,13 +7,6 @@ embeddings_dict = {}
 maxReturnWords = 0
 allSimilarWords = {}
 
-# Opening gloVe File
-with open("files/glove.6B.300d.txt", 'r', encoding='utf-8') as f:
-    for line in f:
-        values = line.split()
-        token = values[0]
-        vector = np.asarray(values[1:], "float32")
-        embeddings_dict[token] = vector
 
 # Finding closest word to input
 def find_closest_embeddings(embedding):
@@ -21,6 +14,14 @@ def find_closest_embeddings(embedding):
 
 def main():
     print('Similar Word Suggestion started...') # Indicating algorithm started
+
+    # Opening gloVe File
+    with open("files/glove.6B.300d.txt", 'r', encoding='utf-8') as f:
+        for line in f:
+            values = line.split()
+            token = values[0]
+            vector = np.asarray(values[1:], "float32")
+            embeddings_dict[token] = vector
 
     # Passing in each object 1 by 1 using objectDetection NOT allObjects (I didn't find the need to find similar words to colors)
     for i in range(len(objectDetection.ListofObjects)):

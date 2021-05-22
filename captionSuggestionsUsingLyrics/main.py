@@ -2,9 +2,10 @@ import colorDetection
 import objectDetection
 import similarWordSuggestion
 import cv2 as cv
-import time
+import time, os
 import lyricsGenius
 import lyricsgenius as genius
+import streamlit as st
 
 AllItems = [] # Declare variable
 
@@ -16,7 +17,7 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
     img = cv.imread(image_file)
     colorDetection.numberOfClusters = numberOfColors
     similarWordSuggestion.maxReturnWords = 5
-    api = genius.Genius('1M3VJ1T9KKthsOiN3BH1N9xD9BnOmKHK52b_vaCfJSQhUhRNTtDxgKjIxrvg0-DD')
+    api = genius.Genius(st.secrets["lyricsGenis_TOKEN"])
     artist = artistName
     maxSongs = numberOfSongs
     sortBy = "title"

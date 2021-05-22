@@ -6,7 +6,6 @@ import pandas as pd
 
 # Initializing variables
 index = ["color", "color_name", "hex", "R", "G", "B"]
-csv = pd.read_csv('files/colors.csv', names=index, header=None)
 
 # Declare variables
 ListofColors = []
@@ -43,6 +42,8 @@ def all_colors_in_img(color_codes):
 
 #Color Recognition using Colors CSV
 def recognize_color(color_index):
+    csv = pd.read_csv('files/colors.csv', names=index, header=None)
+
     R = color_index[0]
     G = color_index[1]
     B = color_index[2]
@@ -71,6 +72,7 @@ def return_root_color(allColorsFound):
 
 def main(img):
     print('Color Detection started...') # Indicating algorithm started
+
     img = cv.cvtColor(img, cv.COLOR_BGR2RGB) # Passing in img
 
     # Resize image
