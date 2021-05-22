@@ -1,5 +1,7 @@
 # Caption Suggestions Using Lyrics 🎶
 
+## [View Deployed App 🚀](https://share.streamlit.io/antoneev/66daysofdata/main/captionSuggestionsUsingLyrics/app.py)
+
 ## Summary of Project 📝
 ### Current Problem 🥲
 The current problem faced by many are not having witting, insightful or simply great captions. With the rise of social media, everything needs a caption. From a photo with your grandmother, to the cute photo with your dog, and even the photo with you “painting the town red”. But the issue is most of us don’t have the right words to caption or photos, this makes us to wait weeks before a photo and sometimes it’s never posted for this reason. Other times it’s simply posted without a caption. 
@@ -28,7 +30,12 @@ Note: times do fluctuate
 * If no objects are found (only colors found) – Runtime with Lyrics 17 seconds
 * Objects and Colors found – Runtime 23 seconds
 
-**INSERT PHOTO WHEN DONE**
+## App Images 📷
+
+![](imgs/top.png?raw=true)
+![](imgs/middle.png?raw=true)
+![](imgs/bottom.png?raw=true)
+
 
 ## Files within the files folder which is not available within this repo 🗄️
 * [Colors.csv]( https://github.com/codebrainz/color-names/blob/master/output/colors.csv)
