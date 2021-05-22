@@ -9,7 +9,6 @@ import os
 # Upload image
 import similarWordSuggestion
 
-
 def displayOuput(artistSession):
     # Output Display
     st.write("# Output")

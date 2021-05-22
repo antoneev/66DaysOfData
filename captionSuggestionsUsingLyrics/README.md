@@ -25,23 +25,22 @@ This is done as followed:
 
 ## Performance 💨
 Note: times do fluctuate
-If no objects are found (only colors found) – Runtime with Lyrics 17 seconds
-Objects and Colors found – Runtime 23 seconds
+* If no objects are found (only colors found) – Runtime with Lyrics 17 seconds
+* Objects and Colors found – Runtime 23 seconds
 
 **INSERT PHOTO WHEN DONE**
 
 ## Files within the files folder which is not available within this repo 🗄️
- [Colors.csv]( https://github.com/codebrainz/color-names/blob/master/output/colors.csv)
- [Coco.names]( https://github.com/pjreddie/darknet/blob/master/data/coco.names)
-[frozen_inference_graph.pb]( https://github.com/datitran/object_detector_app/blob/master/object_detection/ssd_mobilenet_v1_coco_11_06_2017/frozen_inference_graph.pb)
-[glove.6B.300d]( https://www.kaggle.com/thanakomsn/glove6b300dtxt)
-[ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt]( https://gist.github.com/dkurt/54a8e8b51beb3bd3f770b79e56927bd7)
+* [Colors.csv]( https://github.com/codebrainz/color-names/blob/master/output/colors.csv)
+* [Coco.names]( https://github.com/pjreddie/darknet/blob/master/data/coco.names)
+* [frozen_inference_graph.pb]( https://github.com/datitran/object_detector_app/blob/master/object_detection/ssd_mobilenet_v1_coco_11_06_2017/frozen_inference_graph.pb)
+* [glove.6B.300d]( https://www.kaggle.com/thanakomsn/glove6b300dtxt)
+* [ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt]( https://gist.github.com/dkurt/54a8e8b51beb3bd3f770b79e56927bd7)
 
 ## Resources 🗃️
-[Object Detection video 1](https://www.youtube.com/watch?v=HXDD7-EnGBY)
-[Object Detection video 2]( https://www.youtube.com/watch?v=RFqvTmEFtOE)
-[Color Detection KNN]( https://towardsdatascience.com/building-a-color-recognizer-in-python-4783dfc72456)
-[Color Detection Colors.csv](https://laptrinhx.com/building-a-color-recognizer-in-python-2669297194)
-[LyricGenius GitHub](https://github.com/johnwmillr/LyricsGenius)
-[LyricGenius Download Lyrics]( https://rareloot.medium.com/how-to-download-an-artists-lyrics-from-genius-com-using-python-984d298951c6)
-[Streamlit](https://docs.streamlit.io/en/stable/)
+* [Object Detection video 1](https://www.youtube.com/watch?v=HXDD7-EnGBY)
+* [Object Detection video 2]( https://www.youtube.com/watch?v=RFqvTmEFtOE)
+* [Color Detection Colors.csv]( https://towardsdatascience.com/building-a-color-recognizer-in-python-4783dfc72456)
+* [LyricGenius GitHub](https://github.com/johnwmillr/LyricsGenius)
+* [LyricGenius Download Lyrics]( https://rareloot.medium.com/how-to-download-an-artists-lyrics-from-genius-com-using-python-984d298951c6)
+* [Streamlit](https://docs.streamlit.io/en/stable/)
