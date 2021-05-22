@@ -10,8 +10,7 @@ My reasoning behind participating in the #66DaysOfData was to better my current 
 Each project I complete will be added into this repo into a separate folder.
 | Project | Date Completed | App Link | GitHub Link|
 |---|---|---|---|
-|Caption Suggestion for Photos using Lyrics| Complete |[App](https://share.streamlit.io/antoneev/66daysofdata/main/captionSuggestionsUsingLyrics/app.py)
- |[GitHub](https://github.com/antoneev/66DaysOfData/tree/main/captionSuggestionsUsingLyrics)
+|Caption Suggestion for Photos using Lyrics| Complete | [App](https://share.streamlit.io/antoneev/66daysofdata/main/captionSuggestionsUsingLyrics/app.py) |[GitHub](https://github.com/antoneev/66DaysOfData/tree/main/captionSuggestionsUsingLyrics)
 
 ## Learn More
 Learn more about Ken Jee's #66DaysOfData [Learn More](https://www.youtube.com/watch?v=qV_AlRwhI3I&t=308s)
