@@ -29,3 +29,5 @@ Conducting this application with a better list of words.
 * [Streamlit](https://streamlit.io/)
 * [k- to 8th-grade Words](https://www.spelling-words-well.com/free-preschool-games.html)
 * [PDF to Text](https://pypi.org/project/slate3k/)
+* [Creating PDFs using reportlab](http://theautomatic.net/2021/03/25/how-to-create-pdf-files-with-python/)
+* [Google Dictionary API](https://dictionaryapi.dev/)
