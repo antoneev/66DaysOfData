@@ -1,6 +1,5 @@
 requests
-slate3k
-streamlit
 reportlab
 wget
-shutil
+slate3k
+streamlit
