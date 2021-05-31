@@ -22,7 +22,8 @@ There is no dataset or package which contains "complex words". Therefore, I aime
 
 # Future Work 🔮
 
-Conducting this application with a better list of words.
+* Conducting this application with a better list of words.
+* Adding the ability to extract from .png, .jpg and other image files
 
 # Resources 🗃️
 * [Sqlit3](https://www.sqlite.org/index.html)
