@@ -94,7 +94,7 @@ def main():
              ## #66DaysOfData Project 1️⃣
              """)
     st.write(
-        "Cheak out this code's GitHub Repo [Click Here!](https://github.com/antoneev/66DaysOfData/tree/main/captionSuggestionsUsingLyrics)")
+        "GitHub Repo [Click Here!](https://github.com/antoneev/66DaysOfData/tree/main/captionSuggestionsUsingLyrics)")
 
     image_file = st.file_uploader("Upload Files",type=['png','jpeg','jpg'])
     if image_file is not None:

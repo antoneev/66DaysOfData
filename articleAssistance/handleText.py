@@ -1,8 +1,8 @@
 import slate3k as slate
 import re
 
-def pdfToText():
-    with open('inputFiles/test.pdf','rb') as f:
+def pdfToText(filePath):
+    with open(filePath,'rb') as f:
         extracted_text = slate.PDF(f)
     return extracted_text
 

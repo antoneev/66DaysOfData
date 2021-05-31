@@ -31,3 +31,4 @@ Conducting this application with a better list of words.
 * [PDF to Text](https://pypi.org/project/slate3k/)
 * [Creating PDFs using reportlab](http://theautomatic.net/2021/03/25/how-to-create-pdf-files-with-python/)
 * [Google Dictionary API](https://dictionaryapi.dev/)
+* [Embedding PDF into Streamlit](https://blog.jcharistech.com/2020/11/30/how-to-embed-pdf-in-streamlit-apps/)
