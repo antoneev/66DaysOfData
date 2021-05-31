@@ -105,6 +105,6 @@ def main():
 
 if __name__ == '__main__':
     # Creating needed folders on load
-    if os.path.isdir("inputFile/") == False:
+    if os.path.isdir("inputFolder/") == False:
         createFiles()
     main()
