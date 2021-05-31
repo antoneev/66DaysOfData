@@ -2,7 +2,7 @@ from reportlab.platypus import Paragraph
 from reportlab.platypus import SimpleDocTemplate
 
 # Creating outfile object
-outputFilePath = "outputFile/articleAssistance.pdf"
+outputFilePath = "output/articleAssistance.pdf"
 doc = SimpleDocTemplate(outputFilePath)
 
 def outputFile(article,complexWords,returnResults):
