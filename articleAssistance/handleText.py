@@ -18,8 +18,6 @@ def wordCleaningPDF(textFromPDF):
     for i in range(len(pdf_miner)):
         dataNoNewLines.append(pdf_miner[i].lstrip())
 
-    print('dataNoNewLines', dataNoNewLines)
-
     # Call the wordCleaningText function
     cleanedList = wordCleaningText(dataNoNewLines)
 

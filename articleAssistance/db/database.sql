@@ -1,5 +1,3 @@
-DROP TABLE keywords;
-
 CREATE TABLE keywords(
     word TEXT
 );

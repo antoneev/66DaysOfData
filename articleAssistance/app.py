@@ -4,6 +4,7 @@ import os
 import main as backend
 import wget
 import shutil
+import handleDatabase
 
 # Creating side bar with options
 menu = ["Home","Upload Article","Upload Plain Text"]
@@ -21,11 +22,17 @@ def createFiles():
     os.makedirs(outputFolder)
     os.makedirs(dbFolder)
 
-    # Downloading example for home page
-    url = "https://dl.dropbox.com/s/c2fzht782nfzcr5/home-example.pdf" # change www to dl and remove dl from behind zip to download
-    save_path = "files/"
-    filename = wget.download(url)
-    shutil.move(filename, save_path+filename)
+    # Downloading needed files
+    urlHomeExample = "https://dl.dropbox.com/s/c2fzht782nfzcr5/home-example.pdf" # change www to dl and remove dl from behind zip to download
+    filename = wget.download(urlHomeExample)
+    shutil.move(filename, "output/")
+
+    urlDB = "https://dl.dropbox.com/s/apczyhy91f0hiw3/database.sql" # change www to dl and remove dl from behind zip to download
+    filename = wget.download(urlDB)
+    shutil.move(filename, "db/")
+
+    # Creating and loading DB table
+    handleDatabase.createTable()
 
 # Displaying PDF files on UI
 def displayPDF(file):
