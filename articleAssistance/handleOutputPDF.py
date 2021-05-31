@@ -15,7 +15,6 @@ def outputFile(article,complexWords,returnResults):
     complexWordsInfo = "<font size = '12'> "
     # Looping through the dict
     for key, value in returnResults.items():
-        count = 0 # TODO DELETE?
         # Setting all complex word to red
         complexWordsInfo += "<font color ='red'>" + key + " </font>"
         for i in value:
@@ -26,7 +25,6 @@ def outputFile(article,complexWords,returnResults):
             else:
                 # Attaching all other words to the paragraph normally
                 complexWordsInfo += i + " "
-            count += 1 # TODO DELETE?
             # Adding 2 breaklines between each definition
         complexWordsInfo += "<br></br><br></br>"
     complexWordsInfo += "</font>"
