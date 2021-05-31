@@ -11,11 +11,13 @@ def createFiles():
     st.info("Please wait the needed files are getting created. This will only happen on the initial load!")
 
     # Create needed folders
-    path_images = "inputFile/"
-    path_lyrics = "outputFile/"
+    inputFolder = "inputFolder/"
+    outputFolder = "outputFolder/"
+    dbFolder = "db/"
 
-    os.makedirs(path_images)
-    os.makedirs(path_lyrics)
+    os.makedirs(inputFolder)
+    os.makedirs(outputFolder)
+    os.makedirs(dbFolder)
 
 # Displaying PDF files on UI
 def displayPDF(file):
