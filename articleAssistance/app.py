@@ -5,6 +5,7 @@ import main as backend
 import wget
 import shutil
 import handleDatabase
+import webbrowser as wb
 
 # Creating side bar with options
 menu = ["Home","Upload Article","Upload Plain Text"]
@@ -36,15 +37,16 @@ def createFiles():
 
 # Displaying PDF files on UI
 def displayPDF(file):
-    # Opening file from file path
-    with open(file, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-
-    # Embedding PDF in HTML
-    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
-
-    # Displaying File
-    st.markdown(pdf_display, unsafe_allow_html=True)
+    wb.open_new_tab(file)
+    # # Opening file from file path
+    # with open(file, "rb") as f:
+    #     base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    #
+    # # Embedding PDF in HTML
+    # pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+    #
+    # # Displaying File
+    # st.markdown(pdf_display, unsafe_allow_html=True)
 
 def main():
     # On page load or clicking the Home selection
