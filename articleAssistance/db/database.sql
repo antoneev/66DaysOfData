@@ -2,6 +2,10 @@ CREATE TABLE keywords(
     word TEXT
 );
 
+INSERT INTO keywords VALUES ("united states of america");
+INSERT INTO keywords VALUES ("united states");
+INSERT INTO keywords VALUES ("american");
+INSERT INTO keywords VALUES ("america");
 INSERT INTO keywords VALUES ("don't");
 INSERT INTO keywords VALUES ("it's");
 INSERT INTO keywords VALUES ("isn't");

@@ -3,3 +3,4 @@ reportlab
 wget
 slate3k
 streamlit
+nltk

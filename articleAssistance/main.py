@@ -2,22 +2,25 @@ import handleText
 import handleDatabase
 import handleRetrievingWords
 import handleOutputPDF
+from nltk.stem import WordNetLemmatizer
 
 # Handling words to identify those considered complex
 def unknown(cleanedWords):
+    lemmatizer = WordNetLemmatizer()
     # Creating list for words
     unknownWords = []
 
     # Checking each word
     for word in cleanedWords:
         # Calling the DB to see if word is within or not
-        result = handleDatabase.searchForWords(word)
+        lemmatizedWord = lemmatizer.lemmatize(word)
+        result = handleDatabase.searchForWords(lemmatizedWord)
         # If the word is not in the DB
         if result == False:
             # Checking the syllable count of the word
-            count = handleText.syllable_count(word)
+            count = handleText.syllable_count(lemmatizedWord)
             # If the count if greater than 2 including it in the unknownWords list
-            if count > 2:
+            if count > 3:
                 unknownWords.append(word)
 
     # Returning list of words identified as complex

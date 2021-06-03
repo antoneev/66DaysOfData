@@ -1,4 +1,5 @@
 # Article Assistance 📑
+## [View Deployed App 🚀](https://share.streamlit.io/antoneev/66daysofdata/main/articleAssistance/app.py)
 
 # Summary of Project 📖
 ## Current Problem 🥲
@@ -18,7 +19,7 @@ This application aims to assist readers by finding and extracting complex words 
 There is no dataset or package which contains "complex words". Therefore, I aimed to gather all words individuals should know by 8th grade. However, this list still missed different words. Thus, I attempted to assist this list by using the syllable count of a word.
 
 # App Images 📷
-
+![](imgs/example.png?raw=true)
 
 # Future Work 🔮
 

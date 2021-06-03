@@ -63,4 +63,8 @@ def outputFile(article,complexWords,returnResults):
     # Using the info and SimpleDocTemplate to render the PDF
     doc.build(info)
 
+    returnResults.clear()
+    complexWords.clear()
+    returnResults.clear()
+
     return outputFilePath
