@@ -27,7 +27,7 @@ There is no dataset or package which contains "complex words". Therefore, I aime
 * Adding the ability to extract from .png, .jpg and other image files
 
 # Resources 🗃️
-* [Sqlit3](https://www.sqlite.org/index.html)
+* [SQLite3](https://www.sqlite.org/index.html)
 * [Streamlit](https://streamlit.io/)
 * [k- to 8th-grade Words](https://www.spelling-words-well.com/free-preschool-games.html)
 * [PDF to Text](https://pypi.org/project/slate3k/)
