@@ -1,4 +1,4 @@
-#TODO
+# TODO
 1. Distributions
 2. Regularization
 3. Bayes Theorem
@@ -8,7 +8,7 @@
 7. Testing Fundamentals
 8. Evaluations
 
-#Fundamentals
+# Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
 <b> Under-fitting </b> - High bias and low variance. It cannot capture the underlying trend of the data.
 It destroys the accuracy of our machine learning model. Your model is under-fitting the training data when the model 
@@ -336,7 +336,7 @@ Numeric vs Categorical variables
 Time series
 1. Line chart
 
-###Models
+### Models
 #### Learning Type
 <b> Supervised </b>
 
@@ -358,7 +358,7 @@ Time series
 
 #### Regularization
 
-####  Bayes Theorem
+#### Bayes Theorem
 
 #### Evaluations
 
@@ -379,7 +379,7 @@ Time series
 |Boosting|Meta-Learning Algorithms|Dual use|   |   |
 |Random Forests|Meta-Learning Algorithms|Dual use|   |   |
 
-#Fairness Fundamentals
+# Fairness Fundamentals
 - What is fairness?
 - Which models measure fairness?
 - Where should there models be applied?
@@ -389,13 +389,13 @@ Time series
 - Interception analysis
 - Evaluations (Pros and Cons of each)
 
-#Recommendation Fundamentals
+# Recommendation Fundamentals
 - Recommendation system pipeline
 - Which models can be used to predict
 - Pros and Cons of each
 - Evaluations (Pros and Cons of each)
 
-#Testing Fundamentals
+# Testing Fundamentals
 - A/B testing
 - Phase testing 
 
