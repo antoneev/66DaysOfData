@@ -1,7 +1,4 @@
 # TODO
-1. Distributions
-2. Regularization
-3. Bayes Theorem
 4. Models pros and cons
 5. Fairness Fundamentals 
 6. Recommendation Fundamentals
@@ -160,9 +157,7 @@ Cons:
 [Source: Handling Missing Values](https://towardsdatascience.com/7-ways-to-handle-missing-values-in-machine-learning-1a6326adf79e)
 
 ### Cross Validation
-
 ### Non-exhaustive Methods
-
 #### Hold Out Method
 
 The dependent variable (target variable - what you're trying to predict) and the independent variables should be split into x and y variables.
@@ -203,17 +198,14 @@ The general procedure is as follows:
 Stratified K Fold Cross Validation works similar to k-Fold Cross Validation. It differs in the since that the stratification is the process of rearranging the data so as to ensure that each fold is a good representative of the whole. For example, in a binary classification problem where each class comprises of 50% of the data, it is best to arrange the data such that in every fold, each class comprises of about half the instances.
 
 ### Exhaustive Methods
-
 #### Leave-P-Out cross validation
 
 We take p number of points out from the total number of data points in the dataset(say n). While training the model we train it on these (n – p) data points and test the model on p data points. We repeat this process for all the possible combinations of p from the original dataset. Then to get the final accuracy, we average the accuracies from all these iterations.
 
 #### Leave-one-out cross validation
-
 This is a simple variation of Leave-P-Out cross validation and the value of p is set as one. This makes the method much less exhaustive as now for n data points and p = 1, we have n number of combinations.
 
 ![Leave-one-out cross validation](images/LOOCV.png)
-
 
 [Source: Train vs. Test vs. Validation set](https://machinelearningmastery.com/difference-test-validation-datasets/)
 
@@ -234,6 +226,26 @@ This is a simple variation of Leave-P-Out cross validation and the value of p is
 [Source: ROSE and SMOTE explained](https://stats.stackexchange.com/questions/166458/rose-and-smote-oversampling-methods)
 
 [Source: ROSE and SMOTE in R](https://topepo.github.io/caret/subsampling-for-class-imbalances.html#resampling)
+
+#### Regularization
+Regularization is an approach to address over-fitting in ML to help reduce the variance of the model.
+
+L1 regularization tries to estimate the median of the data while the L2 regularization tries to estimate the mean of the data to avoid overfitting.
+L1 tends to shrink coefficients to zero whereas L2 tends to shrink coefficients evenly. L1 is therefore useful for feature selection, as we can drop any variables associated with coefficients that go to zero. L2, on the other hand, is useful when you have collinear/codependent features.
+
+[Source: Regularization Explained AI](https://explained.ai/regularization/L1vsL2.html)
+
+[Source: Regularization Medium](https://medium.com/analytics-vidhya/l1-vs-l2-regularization-which-is-better-d01068e6658c)
+ 
+#### Bayes Theorem
+Describes the probability of an event, based on prior knowledge of conditions that might be
+related to the event.
+
+![Bayes Formula](images/bayes_formula.png)
+
+![Bayes Example](images/bayse-example.png)
+
+[Source: Bayse Example](https://www.statisticshowto.com/probability-and-statistics/probability-main-index/bayes-theorem-problems/)
 
 #### Basic Stats
 1. Likelihood - Generally maximizing the chances of a particular situation to occur. Probability attaches to possible results.
@@ -311,13 +323,72 @@ Please note:
 [Source: P-Values](https://www.investopedia.com/terms/p/p-value.asp)
 
 #### Distributions 
-
 <b> Bernoulli Distribution </b>
+
+A Bernoulli distribution has only two possible outcomes, namely 1 (success) and 0 (failure), and a single trial. So the random variable X which has a Bernoulli distribution can take value 1 with the probability of success, say p, and the value 0 with the probability of failure, say q or 1-p.
+
+The probabilities of success and failure need not be equally likely, like the result of a fight between me and Undertaker. He is pretty much certain to win. So in this case probability of my success is 0.15 while my failure is 0.85
+
+![Bernoulli](images/bernoulli.png)
+
 <b> Uniform Distribution </b>
+
+When you roll a fair die, the outcomes are 1 to 6. The probabilities of getting these outcomes are equally likely and that is the basis of a uniform distribution. 
+
+![Uniform](images/uniform.png)
+
 <b> Binomial Distribution </b>
+
+A distribution where only two outcomes are possible, such as success or failure, gain or loss, win or lose and where the probability of success and failure is same for all the trials is called a Binomial Distribution.
+
+On the basis of the above explanation, the properties of a Binomial Distribution are:
+1. Each trial is independent.
+2. There are only two possible outcomes in a trial- either a success or a failure.
+3. A total number of n identical trials are conducted.
+4. The probability of success and failure is same for all trials. (Trials are identical.)
+
+![Binomial](images/binomial.png)
+
 <b> Normal (Gaussian) Distribution </b>
+
+Normal distribution represents the behavior of most of the situations in the universe.The large sum of (small) random variables often turns out to be normally distributed, contributing to its widespread application. 
+
+Any distribution is known as Normal distribution if it has the following characteristics:
+
+1. The mean, median and mode of the distribution coincide.
+2. The curve of the distribution is bell-shaped and symmetrical about the line x=μ.
+3. The total area under the curve is 1.
+4. Exactly half of the values are to the left of the center and the other half to the right.
+
+![Normal](images/normal.png)
+
 <b> Poisson Distribution </b>
+
+Poisson Distribution is applicable in situations where events occur at random points of time and space wherein our interest lies only in the number of occurrences of the event.
+
+Examples:
+
+1. The number of emergency calls recorded at a hospital in a day.
+2. The number of thefts reported in an area on a day.
+
+A distribution is called Poisson distribution when the following assumptions are valid:
+
+1. Any successful event should not influence the outcome of another successful event.
+2. The probability of success over a short interval must equal the probability of success over a longer interval.
+3. The probability of success in an interval approaches zero as the interval becomes smaller.
+
+![Poisson](images/poisson.png)
+
 <b> Exponential Distribution </b>
+
+Exponential distribution is widely used for survival analysis. From the expected life of a machine to the expected life of a human, exponential distribution successfully delivers the result.
+
+Examples:
+
+1. Length of time beteeen metro arrivals,
+2. Length of time between arrivals at a gas station
+
+![Exponential](images/exponential.png)
 
 [Source: Distributions](https://www.analyticsvidhya.com/blog/2017/09/6-probability-distributions-data-science/)
 
@@ -356,11 +427,14 @@ Time series
 4. <b> Meta-Learning </b> refers to learning algorithms that learn from other learning algorithms. Most commonly, this means the use of machine learning algorithms that learn how to best combine the predictions from other machine learning algorithms in the field of ensemble learning.
 5. <b> Time series </b> pertains to the sequence of observations collected in constant time intervals be it daily, monthly, quarterly or yearly.
 
-#### Regularization
-
-#### Bayes Theorem
-
 #### Evaluations
+Precision
+F1 score
+Specificity
+Accuracy
+Recall
+Sensitivity
+
 
 |Model|Learning Type|Learning Task|Pros|Cons|
 |---|---|---|---|---|
