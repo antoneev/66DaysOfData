@@ -1,9 +1,9 @@
 # TODO
 4. Models pros and cons
 5. Fairness Fundamentals 
-6. Recommendation Fundamentals
-7. Testing Fundamentals
-8. Evaluations
+6. Recommendation Fundamentals 
+7. Testing Fundamentals ✅
+8. Evaluations ✅
 
 # Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
@@ -407,7 +407,6 @@ Numeric vs Categorical variables
 Time series
 1. Line chart
 
-### Models
 #### Learning Type
 <b> Supervised </b>
 
@@ -427,15 +426,157 @@ Time series
 4. <b> Meta-Learning </b> refers to learning algorithms that learn from other learning algorithms. Most commonly, this means the use of machine learning algorithms that learn how to best combine the predictions from other machine learning algorithms in the field of ensemble learning.
 5. <b> Time series </b> pertains to the sequence of observations collected in constant time intervals be it daily, monthly, quarterly or yearly.
 
-#### Evaluations
-Precision
-F1 score
-Specificity
-Accuracy
-Recall
-Sensitivity
+### Evaluations
+#### Classification 
+<b> Prediction Probabilities </b>
 
+During training prediction probability can be use to output the probability of either being yes or no along with it's predicted vs. actual results. 
 
+For example what if we were predicting yes/no instances:
+
+|actual|predicted|no|yes|
+|---|---|---|---|
+|no|no|0.8782163|0.1217837|
+|yes|no|0.3117222|0.6882778|
+
+Many classifiers (such as logistic regression) provide the estimated probability of prediction. These prediction probabilities provide useful data to evaluate a model's performance. If two models make the same number of mistakes, but one is more capable of accurately assessing its uncertainty, then it is a better model.
+
+<b> Classification Accuracy </b>
+
+Classification accuracy is perhaps the simplest metrics one can imagine, and is defined as the number of correct predictions divided by the total number of predictions, multiplied by 100.
+
+<b> Confusion Matrix </b>
+
+A confusion matrix, also known as an error matrix, is a table that categorizes predictions according to whether they match the actual values. One of the table's dimensions indicates the possible categories of predicted values, while the other dimension indicates the categories for actual values.
+
+The relationship between the positive class and negative class predictions can be depicted as a 2 x 2 confusion matrix that tabulates whether predictions fall into one of the four categories:
+
+* True Positive (TP): An “yes” case correctly classified as “yes” case
+* True Negative (TN): A “no” case correctly classified as “no” case 
+* False Positive (FP) or Type I error: A “no” case incorrectly classified as “yes” case 
+* False Negative (FN) or Type II error: An “yes” case incorrectly classified as “no” case
+
+![Confusion Matrix](images/confusion matrix.png)
+
+* <b> Accuracy </b>
+
+Accuracy is the quintessential classification metric. It is pretty easy to understand. And easily suited for binary as well as a multiclass classification problem.
+
+Accuracy = (TP+TN)/(TP+FP+FN+TN)
+
+When to use?
+
+Accuracy is a valid choice of evaluation for classification problems which are well balanced and not skewed or No class imbalance.
+
+* <b> Precision </b>
+
+Answers the following question: What proportion of predicted Positives is truly Positive?
+
+Precision = (TP)/(TP+FP)
+
+When to use?
+
+Precision is a valid choice of evaluation metric when we want to be very sure of our prediction. For example: If we are building a system to predict if we should decrease the credit limit on a particular account, we want to be very sure about our prediction or it may result in customer dissatisfaction.
+
+* <b> Recall </b>
+
+Answers the following question: What proportion of actual Positives is correctly classified?
+
+Recall = (TP)/(TP+FN)
+
+When to use?
+
+Recall is a valid choice of evaluation metric when we want to capture as many positives as possible. For example: If we are building a system to predict if a person has cancer or not, we want to capture the disease even if we are not very sure.
+
+* <b> F1-score </b>
+
+The F1 score is a number between 0 and 1 and is the harmonic mean of precision and recall.
+
+One drawback of the F-measure is that it assigns equal weights to precision and recall. For this reason it is also called the F1-measure. 
+
+![F1 Score](images/f1-score.png)
+
+When to use?
+
+We want to have a model with both good precision and recall.
+
+* <b> Sensitivity and Specificity </b>
+
+Sensitivity and specificity are two other popular metrics mostly used in medical and biology related fields, and are defined as:
+
+Sensitivity = Recall = TP/(TP+FN)
+
+Specificity = True Negative Rate = TN/(TN+FP)
+
+* <b> Kappa Statistics </b>
+
+The kappa statistic, also called Cohen’s kappa statistic, adjusts accuracy by accounting for the possibility of a correct prediction by chance alone. 
+
+![Kappa](images/kappa.png)
+
+When to use?
+
+This is especially important for datasets with a severe class imbalance, because a classifier can obtain high accuracy simply by always guessing the most frequent class.
+
+* <b> Receiver Operating Characteristic Curve (ROC) </b>
+
+The perfect prediction method would yield a point with coordinates (0,100%) in the upper left corner of the ROC space, representing 100% sensitivity (no false negatives) and 100% specificity (no false positives). 
+
+A completely random guess would produce a point along a diagonal line (the so-called line of no-discrimination) from the left bottom to the top right corner. The diagonal line divides the ROC space into two halves. Points above the diagonal represent classification results that are better than random, whereas points below the diagonal line represent poor results, which are worse than random guess.
+
+![ROC](images/roc.png)
+
+As an example your model may predict the below probabilities for 4 sample images: [0.45, 0.6, 0.7, 0.3]. Then depending on the threshold values below, you will get different labels:
+* cut-off= 0.5: predicted-labels= [0,1,1,0] (default threshold)
+* cut-off= 0.2: predicted-labels= [1,1,1,1]
+* cut-off= 0.8: predicted-labels= [0,0,0,0]
+
+As you can see by varying the threshold values, we will get completely different labels. And as you can imagine each of these scenarios would result in a different precision and recall (as well as TPR, FPR) rates.
+
+* <b> Area Under the Curve (AUC) </b>
+
+The area under the curve (AUC), is an aggregated measure of performance of a binary classifier on all possible threshold values (and therefore it is threshold invariant).
+
+AUC calculates the area under the ROC curve, and therefore it is between 0 and 1. One way of interpreting AUC is as the probability that the model ranks a random positive example more highly than a random negative example.
+
+On high-level, the higher the AUC of a model the better it is. But sometimes threshold independent measure is not what you want, e.g. you may care about your model recall and require that to be higher than 99% (while it has a reasonable precision or FPR). In that case, you may want to tune your model threshold such that it meets your minimum requirement on those metrics (and you may not care even if you model AUC is not too high).
+
+![AUC](images/auc.png)
+
+#### Regression
+<b> Mean Squared Error (MSE) </b>
+
+It is one of the most commonly used metrics, but least useful when a single bad prediction would ruin the entire model's predicting abilities, i.e when the dataset contains a lot of noise. It is most useful when the dataset contains outliers, or unexpected values (too high or too low values).
+
+![MSE](images/mse.png)
+
+<b> Root Mean Squared Error (RMSE) </b>
+
+In RMSE, the errors are squared before they are averaged. This basically implies that RMSE assigns a higher weight to larger errors. This indicates that RMSE is much more useful when large errors are present and they drastically affect the model's performance. It avoids taking the absolute value of the error and this trait is useful in many mathematical calculations. In this metric also, lower the value, better is the performance of the model.
+
+![RMSE](images/rmse.png)
+
+<b> Mean Absolute Error (MAE) </b>
+
+MAE is known to be more robust to the outliers than MSE. It is not very sensitive to outliers in comparison to MSE since it doesn't punish huge errors. It is usually used when the performance is measured on continuous variable data. It gives a linear value, which averages the weighted individual differences equally. The lower the value, better is the model's performance.
+
+![MAE](images/mae.png)
+
+<b> R Squared </b>
+
+Like correlation, R² tells you how related two things are. However, we tend to use R² because it’s easier to interpret. R² is the percentage of variation (i.e. varies from 0 to 1) explained by the relationship between two variables.
+
+![R Squared](images/rsquared.png)
+
+[Source: F1-Score, Recall, Precision and Accuracy](https://towardsdatascience.com/the-5-classification-evaluation-metrics-you-must-know-aa97784ff226)
+
+[Source: ROC, AUC Sensitivity and Specificity](https://towardsdatascience.com/20-popular-machine-learning-metrics-part-1-classification-regression-evaluation-metrics-1ca3e282a2ce)
+
+[Source: MAE, MSE and RMSE](https://www.studytonight.com/post/what-is-mean-squared-error-mean-absolute-error-root-mean-squared-error-and-r-squared)
+
+[Source: R Squared](https://towardsdatascience.com/statistics-for-machine-learning-r-squared-explained-425ddfebf667)
+
+#### Models
 |Model|Learning Type|Learning Task|Pros|Cons|
 |---|---|---|---|---|
 |(K) Nearest Neighbor|Supervised|Classification|Simplicity,Non-parametric (makes no assumptions),Great for simple predictions,    |   |
@@ -470,8 +611,26 @@ Sensitivity
 - Evaluations (Pros and Cons of each)
 
 # Testing Fundamentals
-- A/B testing
-- Phase testing 
+<b> A/B Testing </b>
+
+A/B testing (also known as split testing or bucket testing) is a method of comparing two versions of a webpage or app against each other to determine which one performs better. AB testing is essentially an experiment where two or more variants of a page are shown to users at random, and statistical analysis is used to determine which variation performs better for a given conversion goal.
+
+<b> Load/Stress Tests </b>
+
+1. Load tests help you understand how a system behaves under an expected load.
+2. Stress tests help you understand the upper limits of a system's capacity using a load beyond the expected maximum.
+
+<b> Differential Tests </b>
+
+Differential tests perform a comparison between the results of the currently released model and the next one that we plan to release, with the same input. The new model can be an incremental update of the one currently released. But it can be trained with a completely different algorithm or different architecture in a case with Neural Networks.
+
+This kind of test is useful to detect errors that don’t raise exceptions, for example, bugs in the feature engineering code. We should tune these tests to some specified tolerance, i.e., the maximum value of the difference in the output results from both models, which doesn’t raise an error. In a case of incremental improvement of the released model, we should expect a small difference in the outputs. But, in a case with a different algorithm or NN schema, the difference in the results could be not that small.
+
+[Source: A/B Testing](https://www.optimizely.com/optimization-glossary/ab-testing/)
+
+[Source: Load/Stress Tests](https://loadninja.com/resources/articles/performance-testing/load-stress-testing/)
+
+[Source: Differential Tests](https://blog.netcetera.com/testing-and-monitoring-machine-learning-model-deployments-ca878d93e518)
 
 # Acknowledgement
 Many thanks to my Machine Learning professor for the amazing slides from our classroom. It was a great help in my revision.
