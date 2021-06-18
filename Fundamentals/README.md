@@ -2,8 +2,7 @@
 4. Models pros and cons
 5. Fairness Fundamentals 
 6. Recommendation Fundamentals 
-7. Testing Fundamentals ✅
-8. Evaluations ✅
+
 
 # Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
@@ -595,7 +594,169 @@ Like correlation, R² tells you how related two things are. However, we tend to 
 |Random Forests|Meta-Learning Algorithms|Dual use|   |   |
 
 # Fairness Fundamentals
-- What is fairness?
+#### What is fairness?
+The first idea is to find legal support and check if there is any definitions that can be used to formulate fairness quantitatively. eg.(anti-discrimination laws)
+1. Disparate treatment - A decision making process suffers from disparate treatment if its decisions are (partly) based on the subject’s sensitive attribute
+2. Disparate impact - Its outcomes disproportionately hurt (or benefit) people with certain sensitive attribute values (e.g., females, blacks)
+
+These two definitions, however, are too abstract for the purpose of computation. As a result, there is no consensus on the mathematical formulations of fairness.
+
+#### Data-Based Debiasing Techniques
+
+Group Level Fairness: 
+
+Cons: 
+
+1. Doesn't cover multiple independent groups
+2. Recommended unqualified individuals 
+
+Unfair on individual level
+1. Unfair to individual with individuals without merit
+2. Unfair to subgroups
+
+<b> Unawareness </b>
+
+This simply means we should not include the sensitive attribute as a feature in the training data. This notion is consistent with disparate treatment, which requires to not use the sensitive attribute.
+
+Pros:
+
+* Intuitive, easy to use and legal support(disparate treatment).
+
+Cons:
+
+* The fundamental limitation is that there can be many highly correlated features(e.g. neighborhood) that are proxies of the sensitive attribute(e.g. race). Thus, only removing the sensitive attribute is by no means enough.
+
+<b> Individual Fairness </b>
+
+The notion of individual fairness emphasizes on that: similar individuals should be treated similarly. Individual fairness is a relatively different notion. 
+
+Pros:
+
+Rather than focusing on group, as individuals, we tend to care more about the individuals. Besides, individual fairness is more fine-grained than any group-notion fairness: it imposes restriction on the treatment for each pair of individuals.
+
+Cons:
+
+It is hard to determine what is an appropriate metric function to measure the similarity of two inputs(Kim et al. FATML2018). In our case, it is hard to quantify the difference between two job candidates. Imagine three job applicants, A, B and C. A has a bachelor degree and 1 year related work experience. B has a master degree and 1 year related work experience. C has a master degree but no related work experience. Is A closer to B than C? If so, by how much? Such question is hard to answer since we cannot have the performance of A, B, and C (we cannot hire all three). Otherwise we can apply techniques in a field called metric learning. It becomes even worse when the sensitive attribute(s) comes into the play. If we should and how to count for the difference of group membership in our metric function?
+
+<b> Demographic Parity (Group Fairness) </b>
+
+Demographic Parity, also called Independence, Statistical Parity, is one of the most well-known criteria for fairness. The acceptance rates of the applicants from the two groups must be equal
+
+Pros:
+
+* Legal Support: “four-fifth rule” prescribes that a selection rate for any disadvantaged group that is less than four-fifths of that for the group with the highest rate. In our formulation, this is equivalent to satisfying 80% rule. If this rule is violated, justification as being job-related or a business necessity must be provided. “Business necessity means that using the procedure is essential to the safe and efficient operation of the business — and there are no alternative procedures that are substantially equally valid and would have less adverse impact”(source: Adverse Impact Analysis / Four-Fifths Rule).
+* There are some papers that argue the enforcement of such criteria in short term benefits building up the reputation of the disadvantageous minority group in the labor market in the long run (Hu and Chen, WWW2018).
+
+Cons:
+
+* This definition ignores any possible correlation between Y and A. In particular, it rules out perfect predictor C=Y when base rates are different (i.e. P₀ [Y=1] ≠ P₁ [Y=1])
+* laziness: if we hire the qualified from one group and random people from the other group, we can still achieve demographic parity.
+
+<b> Equalized Odds (Group Fairness) </b>
+
+Equalized odds, also called Separation, Positive Rate Parity, was first proposed in Hardt, Price and Srebro, 2016 and Zafar et al. WWW2017.
+
+A weaker notion is: which is called Accuracy Parity. The limitation of this weaker notion is that we can trade false positive rate of one group for false negative rate of another group. Such trade is not desirable sometimes(e.g. trade rejecting(C=0) qualified applicants(Y=1) from group1 (A=0) for accepting(C=1) unqualified people(Y=0) from group2 (A=1) ).
+
+In many applications(e.g. hiring), people care more about the true positive rate than true negative rate so many works focus on the following relaxed version: which is called <b> Equality of Opportunity. </b>
+
+<b> Counterfactual fairness </b>
+
+It provides a possible way to interpret the causes of bias.
+
+A counterfactual value replaces the original value of the sensitive attribute. The counterfactual value propagates “downstream” the causal graph(see Fig6 for an example) via some structural equations. Everything else that are not descendant of the sensitive attribute remains the same.
+
+![Counterfactual Downward](images/counterfactual-node.png)
+
+Pros:
+
+Unawareness is far from being enough due to many correlated features. Demographic Parity, Equalized odds and Predictive Rate Parity are all observational fairness criteria. They cannot be used to find the cause of the unfairness phenomenon. Individual Fairness has fundamental limitation of finding the proper metric. Counterfactual fairness solved all these problems.
+
+Counterfactual fairness provides a way to check the possible impact of replacing only the sensitive attribute. It provides a way of explaining the impact of bias via a causal graph. Fig6 shows several possible graphs in the scenario of applying to college. Notice that when we replace the sensitive attribute, all the other features that are correlated with it will also be influenced. In Fig6, if the sensitive attribute(race) is changed, the education score as well as work score will also change.
+
+Cons:
+
+The idea is very ideal. In practice, it is hard to reach a consensus in terms of what the causal graph should look like and it is even harder to decide which features to use even if we have such a graph (we may suffer large loss on accuracy if we eliminate all the correlated features).
+
+<b> Augment data with counterfactuals </b>
+
+For each sentence, it adds a new datapoint with the opposite gender nouns/pronouns.
+
+Ex. Original - He went to the doctor. Augment - She went to the doctor.
+
+Con:
+
+This doesn't work well with non-english languages.
+
+![Augment data with counterfactuals](images/counterfactuals.png)
+
+<b> Counterfactual Data Augmentation for Mitigating Gender Stereotypes in Languages with Rich Morphology </b>
+
+The authors of the paper propose using Rich Morphology with counterfactuals to help decrease bias and keep correct grammar in different languages.
+
+![Counterfactuals RM Nodes](images/counterfactual-rm-nodes.png)
+
+![Counterfactuals RM Results](images/counterfactual-rm-results.png)
+
+<b> Predictive Rate Parity (Group Fairness) </b>
+<br>
+<b> Equalize the number of datapoints </b>
+
+1. Train on equal number of datapoints from the target demographics. 
+* You might have noticed that making a selection of the dataset that equalizes the
+number of datapoints per demographic/category. This makes the resulting dataset
+size constrained to product of the size of the smallest demographic and the number
+of demographics.
+* In some cases, equalizing the ratio instead can lead to a higher resulting sample
+size
+
+2. Equal ratio of the number of datapoints per target level in each catergory
+* This results into a higher sample size than equalizing the number of
+datapoints
+
+[Source: All other approaches](https://towardsdatascience.com/a-tutorial-on-fairness-in-machine-learning-3ff8ba1040cb)
+
+[Source: Equalize the number of datapoints and Augment data with counterfactuals ](https://ocw.mit.edu/resources/res-ec-001-exploring-fairness-in-machine-learning-for-international-development-spring-2020/module-four-case-studies/case-study-mitigating-gender-bias/MITRES_EC001S19_video7.pdf)
+
+[Source: Counterfactual Data Augmentation for Mitigating Gender Stereotypes in Languages with Rich Morphology](https://vimeo.com/384485394)
+
+#### Causes of Bias Systems
+
+They can be grouped into the following three problems:
+* Discovering unobserved differences in performance:skewed sample, tainted examples
+* Sample Coping with observed differences in performance: limited features, sample size disparity
+* Understanding the causes of disparities in predicted outcome: proxies
+
+<b> Skewed sample </b>
+
+If by some chance some initial bias happens, such bias may compound over time: future observations confirm prediction and fewer opportunity to make observations that contradict prediction. One example is police record. The record of crimes only come from those crimes observed by police. The police department tends to dispatch more officers to the place that was found to have higher crime rate initially and is thus more likely to record crimes in such regions. Even if people in other regions have higher crime rate later, it is possible that due to less police attention, the police department still record that these regions have lower crime rate. The prediction system trained using data collected in this way tends to have positive bias towards regions with less police.
+
+
+<b> Tainted examples </b>
+
+Any ML system keeps the bias existing in the old data caused by human bias. For example, if a system uses hiring decisions made by a manager as labels to select applicants rather than the capability of a job applicants (most of time this capability is unobserved for people who are rejected). The system trained using these samples will replicate the bias existing in the manager’s decisions(if there are any). Another example is that word embeddings trained on Google News articles “exhibit female/male gender stereotypes to a disturbing extent” e.g. the relationship between “man” and “computer programmers” was found to be highly similar to that between “woman” and “homemaker” (Bolukbasi et al. 2016).
+
+
+<b> Limited features </b>
+
+features may be less informative or reliably collected for minority group(s). If the reliability of the label from a minority group is much lower than the counterpart from a majority group, the system tends to have much lower accuracy for the prediction of the minority group due to these noise.
+
+<b> Sample size disparity </b>
+
+If the training data coming from the minority group is much less than those coming from the majority group, it is less likely to model perfectly the minority group.
+
+<b> proxies </b>
+
+Even if sensitive attribute(attributes that are considered should not be used for a task e.g. race/gender) is not used for training a ML system, there can always be other features that are proxies of the sensitive attribute(e.g. neighborhood). If such features are included, the bias will still happen. Sometimes, it is very hard to determine if a relevant feature is too correlated with protected features and if we should include it in training.
+
+#### Bias Mitigation
+
+<b> Pre-Processing Bias Mitigation </b>
+<b> In-Processing Bias Mitigation </b>
+<b> Post-Processing Bias Mitigation </b>
+
+#### Fariness vs. Accuracy 
+
 - Which models measure fairness?
 - Where should there models be applied?
 - Pros and Cons of each model 
