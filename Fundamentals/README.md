@@ -1,8 +1,7 @@
 # TODO
-4. Models pros and cons
-5. Fairness Fundamentals 
-6. Recommendation Fundamentals 
-
+1. Models pros and cons
+2. Recommendation Fundamentals 
+3. KNN, Kmeans and Logistic Regression formula and explained 
 
 # Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
@@ -602,7 +601,6 @@ The first idea is to find legal support and check if there is any definitions th
 These two definitions, however, are too abstract for the purpose of computation. As a result, there is no consensus on the mathematical formulations of fairness.
 
 #### Data-Based Debiasing Techniques
-
 Group Level Fairness: 
 
 Cons: 
@@ -714,14 +712,7 @@ size
 * This results into a higher sample size than equalizing the number of
 datapoints
 
-[Source: All other approaches](https://towardsdatascience.com/a-tutorial-on-fairness-in-machine-learning-3ff8ba1040cb)
-
-[Source: Equalize the number of datapoints and Augment data with counterfactuals ](https://ocw.mit.edu/resources/res-ec-001-exploring-fairness-in-machine-learning-for-international-development-spring-2020/module-four-case-studies/case-study-mitigating-gender-bias/MITRES_EC001S19_video7.pdf)
-
-[Source: Counterfactual Data Augmentation for Mitigating Gender Stereotypes in Languages with Rich Morphology](https://vimeo.com/384485394)
-
 #### Causes of Bias Systems
-
 They can be grouped into the following three problems:
 * Discovering unobserved differences in performance:skewed sample, tainted examples
 * Sample Coping with observed differences in performance: limited features, sample size disparity
@@ -749,21 +740,76 @@ If the training data coming from the minority group is much less than those comi
 
 Even if sensitive attribute(attributes that are considered should not be used for a task e.g. race/gender) is not used for training a ML system, there can always be other features that are proxies of the sensitive attribute(e.g. neighborhood). If such features are included, the bias will still happen. Sometimes, it is very hard to determine if a relevant feature is too correlated with protected features and if we should include it in training.
 
-#### Bias Mitigation
+#### The Impossibility theorem of fairness
+It turns out that any two of the three criteria in some data-base techniques are mutually exclusive except in non-degenerate cases.
 
-<b> Pre-Processing Bias Mitigation </b>
-<b> In-Processing Bias Mitigation </b>
-<b> Post-Processing Bias Mitigation </b>
+* Demographic Parity VS Predictive Rate Parity
+* Demographic Parity VS Equalized Odds
+* Equalized Odds VS Predictive Rate Parity
 
-#### Fariness vs. Accuracy 
+#### Bias Mitigation for Model Development Lifecycle
+<b> Pre-Processing Bias Mitigation, or adjustments on the training data </b>
 
-- Which models measure fairness?
-- Where should there models be applied?
-- Pros and Cons of each model 
-- Who determines fairness?
-- Different types of fairness
-- Interception analysis
-- Evaluations (Pros and Cons of each)
+Pre-processing techniques for bias mitigation tend to be all about the data. As described in the previous section, particular characteristics of the training data may directly cause the problematic performance of a learned model. For this reason, many techniques for pre-processing focus on modifying the training set to overcome versions of dataset imbalance.
+
+This can be achieved in numerous ways including resampling rows of the data, reweighting rows of the data, flipping the class labels across groups, and omitting sensitive variables or proxies. Other techniques consider learning direct modifications and transformation functions that achieve desired fairness constraints.
+
+In all cases, the strategy is to change the underlying training data, and then proceed with training using any classification algorithm desired. By modifying the training data in these specific ways, the outputs of the learned classifier will be less biased.
+
+<b> In-Processing Bias Mitigation, or algorithms specifically intended to be fair </b>
+
+With in-processing techniques, we want to create a classifier that is explicitly aware of our fairness goals. That is, in training the classifier, it is not enough to simply optimize for accuracy on the training data. Instead, we modify the loss function to account simultaneously for our two goals: our model should be both accurate and fair.
+
+This modification can be achieved in many ways such as using adversarial techniques, ensuring underlying representations are fair, or by framing constraints and regularization. In each case, the goal is that the underlying classifier is directly taking fairness into consideration.
+
+As a result, the outcomes of that trained classifier will be less biased as compared to a classifier that knew nothing about fairness.
+
+<b> Post-Processing Bias Mitigation, or adjusting the outputs of the model </b>
+
+Finally, there is a family of techniques that aim to only adjust the outputs of a model and leave the underlying classifier and data untouched. The benefit here is appealing in its simplicity — in using post-processing methods, we allow the model development team to use any modeling algorithms they wish, and they don’t need to modify their algorithm or retrain a new model to make it more fair.
+
+Instead, post-processing methods center on the idea of adjusting the outputs of an unfair model such that the final outputs become fair. As an example, early works in this area have focused on modifying outcomes and thresholds in a group-specific manner.
+
+Suppose we build a classification model to assist in credit risk decisions. After much hyperparameter tuning, we arrive at a model that is accurate and generalizes well, but we notice that it tends to favor older loan applicants over younger applicants.
+
+With post-processing techniques, we would keep the classifier as is, but adjust the outcomes so that the overall acceptance rates are more equitable. We would pick a definition of fairness (say, Demographic Parity), and adjust the treatments across the groups such that the final outcomes are as desired. This means we might have group-specific thresholds instead of a single threshold for the classifier.
+
+It’s important to note that in this scenario, there remains a lot of legal ambiguity around bias mitigation. With so much unknown about how courts will handle algorithmic discrimination, many organizations are leaning heavily on their legal teams for how to navigate this complexity!
+
+Many post-processing techniques have this basic structure in common: they leave the classifier and the data alone, and only adjust the outcomes in a group-dependent way. And while binary classification has been a focus in the past, recent work has sought to extend these ideas to regression models as well. The overall framework can be effective for achieving fairness in an ML system, though in some use cases, treating groups differently could be an uncomfortable proposition, or even an illegal one.
+
+#### Fairness vs. Accuracy 
+The impact of imposing the above constraints on the accuracy truly depends on the dataset, the fairness definition used as well as the algorithms used. In general, however, fairness hurts accuracy because it diverts the objective from accuracy only to both accuracy and fairness.
+
+These are challenging questions that have no single right answer. Instead, ML practitioners must work together with stakeholders such as business leaders, humanities experts, compliance, and legal teams and formulate a program for how to best treat your population. More broadly, fairness is only a small component of what is required in responsibly deploying machine learning: this post should be the start, not the end, of the conversation.
+
+![Fariness vs. Accuracy](images/fairness-vs-acc.png)
+
+#### Fairness Metric
+To define fairness in this context, we used a p% rule, a generic version of the 80% rule used to quantify the fairness of a model (there are other methods proposed by researchers). The rule is based on quantifying the disparate impact on a group of people with a protected attribute (race, sex, age, etc).
+
+#### Definition: P% Rule
+The p% rule calculates the distance (as a percentage) between the estimated value and the true value for the largest contributor in a table, as follows (see source for mathematical formula):
+
+X is the value for the largest contributor, ^X = Total - Y is the estimate of X, and Y is the value for the second largest contributor. If the value of p is less than the p% threshold then the cell is deemed sensitive. If a cell is sensitive then aggregation or suppression (with secondary suppression) must be applied to the table. If a contributor’s value is negative, take the absolute value before calculating p.
+
+The value of the threshold is confidential and is not to be made public.
+
+#### Interception Analysis
+
+For photo classification between genders, we do not only want to see which genders were correctly classified. But we may want to see the results of this classification across different skin tones.
+
+[Source: All other approaches](https://towardsdatascience.com/a-tutorial-on-fairness-in-machine-learning-3ff8ba1040cb)
+
+[Source: Equalize the number of datapoints and Augment data with counterfactuals ](https://ocw.mit.edu/resources/res-ec-001-exploring-fairness-in-machine-learning-for-international-development-spring-2020/module-four-case-studies/case-study-mitigating-gender-bias/MITRES_EC001S19_video7.pdf)
+
+[Source: Counterfactual Data Augmentation for Mitigating Gender Stereotypes in Languages with Rich Morphology](https://vimeo.com/384485394)
+
+[Source: Pre- In- Post- Processing](https://towardsdatascience.com/algorithms-for-fair-machine-learning-an-introduction-2e428b7791f3)
+
+[Source: Fairness Metric](https://blog.insightdatascience.com/tackling-discrimination-in-machine-learning-5c95fde95e95)
+
+[Source: P% Rule](https://www.tariffnumber.com/info/abbreviations/17261)
 
 # Recommendation Fundamentals
 - Recommendation system pipeline
