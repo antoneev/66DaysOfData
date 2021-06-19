@@ -1,7 +1,6 @@
 # TODO
 1. Models pros and cons
-2. Recommendation Fundamentals 
-3. KNN, Kmeans and Logistic Regression formula and explained 
+2. KNN, Kmeans and Logistic Regression formula and explained 
 
 # Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
@@ -812,10 +811,120 @@ For photo classification between genders, we do not only want to see which gende
 [Source: P% Rule](https://www.tariffnumber.com/info/abbreviations/17261)
 
 # Recommendation Fundamentals
-- Recommendation system pipeline
-- Which models can be used to predict
-- Pros and Cons of each
-- Evaluations (Pros and Cons of each)
+#### Component Procedures of a Recommender
+Recommenders mostly have 3 components:
+
+1. <b> Candidate Generations </b>: This method is responsible for generating smaller subsets of candidates to recommend to a user, given a huge pool of thousands of items.
+2. <b> Scoring Systems </b>: Candidate Generations can be done by different Generators, so, we need to standardize everything and try to assign a score to each of the items in the subsets. This is done by the Scoring system.
+3. <b> Re-Ranking Systems </b>: After the scoring is done, along with it the system takes into account other additional constraints to produce the final rankings.
+
+### Candidate Generation Systems
+#### Content-based recommendation
+Content-Based recommender system tries to guess the features or behavior of a user given the item’s features, he/she reacts positively to.
+
+![Content Based Recommendation](images/content-based.png)
+
+The last two columns Action and Comedy Describe the Genres of the movies. Now, given these genres, we can know which users like which genre, as a result, we can obtain features corresponding to that particular user, depending on how he/she reacts to movies of that genre.
+
+Once, we know the likings of the user we can embed him/her in an embedding space using the feature vector generated and recommend him/her according to his/her choice. During recommendation, the similarity metrics (We will talk about it in a bit) are calculated from the item’s feature vectors and the user’s preferred feature vectors from his/her previous records. Then, the top few are recommended.
+
+Content-based filtering does not require other users' data during recommendations to one user.
+
+Pros:
+
+* The model doesn't need any data about other users, since the recommendations are specific to this user. This makes it easier to scale to a large number of users.
+* The model can capture the specific interests of a user, and can recommend niche items that very few other users are interested in.
+
+Cons:
+
+* Since the feature representation of the items are hand-engineered to some extent, this technique requires a lot of domain knowledge. Therefore, the model can only be as good as the hand-engineered features.
+* The model can only make recommendations based on existing interests of the user. In other words, the model has limited ability to expand on the users' existing interests.
+
+#### Collaborative filtering
+Collaborative does not need the features of the items to be given. Every user and item is described by a feature vector or embedding.
+
+It creates embedding for both users and items on its own. It embeds both users and items in the same embedding space.
+
+It considers other users’ reactions while recommending a particular user. It notes which items a particular user likes and also the items that the users with behavior and likings like him/her likes, to recommend items to that user.
+
+It collects user feedbacks on different items and uses them for recommendations.
+
+Pros:
+* No domain knowledge necessary
+* Serendipity
+* Great starting point
+
+Cons:
+* Cannot handle fresh items
+* Hard to include side features for query/item
+
+#### Sources of user-item interactions
+<b>Implicit Feedback</b>: The user’s likes and dislikes are noted and recorded on the basis of his/her actions like clicks, searches, and purchases. They are found in abundance but negative feedback is not found.
+
+<b>Explicit Feedback</b>: The user specifies his/her likes or dislikes by actions like reacting to an item or rating it. It has both positive and negative feedback but less in number
+
+#### Types of collaborative Recommender Systems:
+<b>Memory-based collaborative filtering</b>: Done mainly remembering the user-item interaction matrix, and how a user reacts to it, i.e, the rating that a user gives to an item. There is no dimensionality reduction or model fitting as such. Mainly two sections:
+
+<b>User-User filtering</b>: In this kind, if a user A’s characteristics are similar to some other user B then, the products that B liked are recommended to A. As a statement, we can say, “the users who like products similar to you also liked those products”. So here we recommend using the similarities between two users.
+
+<b>Item-Item filtering</b>: Here, if user A likes an item x, then, the items y and z which are similar to x in property, then y and z are recommended to the user. As a statement, it can be said, “Because you liked this, you may also like those”.
+
+### Similarity Metrics
+1. Cosine Similarity: The Cosine angle between the vectors.
+2. Dot Product: The cosine angle and magnitude of the vectors also matters.
+3. Euclidian Distance: The elementwise squared distance between two vectors
+4. Pearson Similarity: The covariance of the two n-dimensional vectors divided by the product of their standard deviations.
+
+### Model-based collaborative filtering
+#### Clustering algorithms
+Clustering Algorithms: They normally use simple clustering Algorithms like K-Nearest Neighbours to find the K closest neighbors or embeddings given a user or an item embedding based on the similarity metrics used.
+
+#### Matrix Factorization based algorithm
+The dimensionality reduction can be done by several methods:
+<b> SVD: Singular Value Decomposition </b>
+Pros: 
+* Simplifies data
+* Removes noise
+* May improve algorithm results
+
+Cons: 
+* Transformed data may be difficult to understand
+
+<b> PMF: Probability Matrix Factorization </b>
+
+* None found
+
+<b> NMF: Non-Negative Matrix Factorization </b>
+
+Pros: 
+* This performs better with sparse matrices.
+
+
+<b> Weighted Alternating Least Squares (Minimizing the Objective function) </b>
+
+Pros:
+* Fast
+* Works well in practice
+* Speedy convergence
+* Only need to initialize W(0)
+* 0 elements not locked
+
+Cons:
+* No sparsity of W and H incorporated into mathematical setup
+* Ad hoc nonnegativity: negative elements are set to 0
+* Ad hoc sparsity: negative elements are set to 0
+* No convergence theory
+
+[Source: All other topics](https://towardsdatascience.com/introduction-to-recommender-systems-1-971bd274f421)
+
+[Source: Pearson Similarity](https://neo4j.com/docs/graph-algorithms/current/labs-algorithms/pearson/#:~:text=Pearson%20similarity%20is%20the%20covariance,product%20of%20their%20standard%20deviations.)
+
+[Source: Pros, Cons, Retrieval, Scoring and Re-ranking](https://developers.google.com/machine-learning/recommendation/overview/candidate-generation)
+
+[Source: SVD: Singular Value Decomposition Pros and Cons](https://livebook.manning.com/book/machine-learning-in-action/chapter-14/#:~:text=of%20the%20SVD-,The%20singular%20value%20decomposition%20(SVD),a%20much%20smaller%20data%20set.)
+
+[Source: Weighted Alternating Least Squares (Minimizing the Objective function) Pros and Cons](https://langvillea.people.cofc.edu/NISS-NMF.pdf)
 
 # Testing Fundamentals
 <b> A/B Testing </b>
