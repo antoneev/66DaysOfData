@@ -916,6 +916,45 @@ Cons:
 * Ad hoc sparsity: negative elements are set to 0
 * No convergence theory
 
+### Scoring Systems
+The recommendation system may have multiple candidate generators that use different sources, such as the following:
+
+* Related items from a matrix factorization model.
+* User features that account for personalization.
+* "Local" vs "distant" items; that is, taking geographic information into account.
+* Popular or trending items.
+* A social graph; that is, items liked or recommended by friends.
+
+#### Why Not Let the Candidate Generator Score?
+Since candidate generators compute a score (such as the similarity measure in the embedding space), you might be tempted to use them to do ranking as well. However, you should avoid this practice for the following reasons:
+
+* Some systems rely on multiple candidate generators. The scores of these different generators might not be comparable.
+* With a smaller pool of candidates, the system can afford to use more features and a more complex model that may better capture context.
+
+#### Positional Bias in Scoring
+Items that appear lower on the screen are less likely to be clicked than items appearing higher on the screen. However, when scoring videos, the system usually doesn't know where on the screen a link to that video will ultimately appear. Querying the model with all possible positions is too expensive. Even if querying multiple positions were feasible, the system still might not find a consistent ranking across multiple ranking scores.
+
+#### Solutions
+* Create position-independent rankings.
+* Rank all the candidates as if they are in the top position on the screen.
+
+### Re-ranking Systems
+Example: You can implement re-ranking on a video recommender by doing the following:
+* Training a separate model that detects whether a video is click-bait.
+* Running this model on the candidate list.
+* Removing the videos that the model classifies as click-bait.
+
+Example: The system re-ranks videos by modifying the score as a function of:
+* video age (perhaps to promote fresher content)
+* video length
+
+#### Freshness
+Solutions
+* Re-run training as often as possible to learn on the latest training data. We recommend warm-starting the training so that the model does not have to re-learn from scratch. Warm-starting can significantly reduce training time. For example, in matrix factorization, warm-start the embeddings for items that were present in the previous instance of the model.
+* Create an "average" user to represent new users in matrix factorization models. You don't need the same embedding for each user—you can create clusters of users based on user features.
+* Use a DNN such as a softmax model or two-tower model. Since the model takes feature vectors as input, it can be run on a query or item that was not seen during training.
+* Add document age as a feature. For example, YouTube can add a video's age or the time of its last viewing as a feature.
+
 [Source: All other topics](https://towardsdatascience.com/introduction-to-recommender-systems-1-971bd274f421)
 
 [Source: Pearson Similarity](https://neo4j.com/docs/graph-algorithms/current/labs-algorithms/pearson/#:~:text=Pearson%20similarity%20is%20the%20covariance,product%20of%20their%20standard%20deviations.)
@@ -925,6 +964,19 @@ Cons:
 [Source: SVD: Singular Value Decomposition Pros and Cons](https://livebook.manning.com/book/machine-learning-in-action/chapter-14/#:~:text=of%20the%20SVD-,The%20singular%20value%20decomposition%20(SVD),a%20much%20smaller%20data%20set.)
 
 [Source: Weighted Alternating Least Squares (Minimizing the Objective function) Pros and Cons](https://langvillea.people.cofc.edu/NISS-NMF.pdf)
+
+#### Diversity
+Solutions
+* Train multiple candidate generators using different sources.
+* Train multiple rankers using different objective functions.
+* Re-rank items based on genre or other metadata to ensure diversity.
+
+#### Fairness
+Solutions
+* Include diverse perspectives in design and development.
+* Train ML models on comprehensive data sets. Add auxiliary data when your data is too sparse (for example, when certain categories are under-represented).
+* Track metrics (for example, accuracy and absolute error) on each demographic to watch for biases.
+* Make separate models for underserved groups.
 
 # Testing Fundamentals
 <b> A/B Testing </b>
