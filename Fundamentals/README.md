@@ -230,6 +230,9 @@ Regularization is an approach to address over-fitting in ML to help reduce the v
 L1 regularization tries to estimate the median of the data while the L2 regularization tries to estimate the mean of the data to avoid overfitting.
 L1 tends to shrink coefficients to zero whereas L2 tends to shrink coefficients evenly. L1 is therefore useful for feature selection, as we can drop any variables associated with coefficients that go to zero. L2, on the other hand, is useful when you have collinear/codependent features.
 
+- L1 - Lasso Regression
+- L2 - Ridge Regression
+
 [Source: Regularization Explained AI](https://explained.ai/regularization/L1vsL2.html)
 
 [Source: Regularization Medium](https://medium.com/analytics-vidhya/l1-vs-l2-regularization-which-is-better-d01068e6658c)
@@ -574,22 +577,22 @@ Like correlation, R² tells you how related two things are. However, we tend to 
 [Source: R Squared](https://towardsdatascience.com/statistics-for-machine-learning-r-squared-explained-425ddfebf667)
 
 #### Models
-|Model|Learning Type|Learning Task|Pros|Cons|
-|---|---|---|---|---|
-|(K) Nearest Neighbor|Supervised|Classification|Simplicity,Non-parametric (makes no assumptions),Great for simple predictions,    |   |
-|Naive Bayes|Supervised|Classification|   |   |
-|Decision Trees|Supervised|Classification|   |   |
-|Classification Rule Learners|Supervised|Classification|   |   |
-|Logistic Regression|Supervised|Classification|   |   |
-|Linear Regression|Supervised|Regression|   |   |
-|Model Trees|Supervised|Regression|   |   |
-|Neural Networks|Supervised|Dual use|   |   |
-|Support Vector Machines|Supervised|Dual use|   |   |
-|Association Rules|Unsupervised|Pattern detection|   |   |
-|K-means clustering|Unsupervised|Clustering|   |   |
-|Bagging|Meta-Learning Algorithms|Dual use|   |   |
-|Boosting|Meta-Learning Algorithms|Dual use|   |   |
-|Random Forests|Meta-Learning Algorithms|Dual use|   |   |
+|Model|Learning Type|Learning Task|Pros & Cons|
+|---|---|---|---|
+|(K) Nearest Neighbor|Supervised|Classification|[Pros and Cons](https://www.fromthegenesis.com/pros-and-cons-of-k-nearest-neighbors/)| 
+|Naive Bayes|Supervised|Classification|[Pros and Cons](https://www.fromthegenesis.com/naive-bayes/)| 
+|Decision Trees|Supervised|Classification|[Pros and Cons](https://www.fromthegenesis.com/decision-tree/)|
+|Classification Rule Learners|Supervised|Classification|Not Found|
+|Logistic Regression|Supervised|Classification|[Pros and Cons](https://holypython.com/log-reg/logistic-regression-pros-cons/)|
+|Linear Regression|Supervised|Regression|[Pros and Cons]()|
+|Model Trees|Supervised|Regression|[Pros and Cons]()|
+|Neural Networks|Supervised|Dual use|[Pros and Cons]()|
+|Support Vector Machines|Supervised|Dual use|[Pros and Cons]()|
+|Association Rules|Unsupervised|Pattern detection|[Pros and Cons]()|
+|K-means clustering|Unsupervised|Clustering|[Pros and Cons]()|
+|Bagging|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
+|Boosting|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
+|Random Forests|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
 
 # Fairness Fundamentals
 #### What is fairness?
