@@ -1,6 +1,5 @@
-# TODO
-1. Models pros and cons
-2. KNN, Kmeans and Logistic Regression formula and explained 
+# Acknowledgement
+Thank you to my ML professor for the great slides I still have. Also, thank you to everyone I've used as a source throughout this review. The content you post and provide is amazing. I've made sure to link all my sources for each section at the end. Check them out and give them a clap on Medium, if it's a Medium posting!
 
 # Fundamentals
 #### Under-fitting vs Over-fitting (Bias vs Variance)
@@ -584,15 +583,15 @@ Like correlation, R² tells you how related two things are. However, we tend to 
 |Decision Trees|Supervised|Classification|[Pros and Cons](https://www.fromthegenesis.com/decision-tree/)|
 |Classification Rule Learners|Supervised|Classification|Not Found|
 |Logistic Regression|Supervised|Classification|[Pros and Cons](https://holypython.com/log-reg/logistic-regression-pros-cons/)|
-|Linear Regression|Supervised|Regression|[Pros and Cons]()|
-|Model Trees|Supervised|Regression|[Pros and Cons]()|
-|Neural Networks|Supervised|Dual use|[Pros and Cons]()|
-|Support Vector Machines|Supervised|Dual use|[Pros and Cons]()|
-|Association Rules|Unsupervised|Pattern detection|[Pros and Cons]()|
-|K-means clustering|Unsupervised|Clustering|[Pros and Cons]()|
-|Bagging|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
-|Boosting|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
-|Random Forests|Meta-Learning Algorithms|Dual use|[Pros and Cons]()|
+|Linear Regression|Supervised|Regression|[Pros and Cons](https://www.geeksforgeeks.org/ml-advantages-and-disadvantages-of-linear-regression/)|
+|Model Trees|Supervised|Regression|Not Found|
+|Neural Networks|Supervised|Dual use|[Pros and Cons](https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781788397872/1/ch01lvl1sec27/pros-and-cons-of-neural-networks)|
+|Support Vector Machines|Supervised|Dual use|[Pros and Cons](https://holypython.com/svm/support-vector-machine-pros-cons/)|
+|Association Rules|Unsupervised|Pattern detection|Not Found|
+|K-means clustering|Unsupervised|Clustering|[Pros and Cons](https://developers.google.com/machine-learning/clustering/algorithm/advantages-disadvantages)|
+|Bagging|Meta-Learning Algorithms|Dual use|[Pros and Cons](https://medium.com/@ruhi3929/bagging-and-boosting-method-c036236376eb)|
+|Boosting|Meta-Learning Algorithms|Dual use|[Pros and Cons](https://medium.com/@ruhi3929/bagging-and-boosting-method-c036236376eb)|
+|Random Forests|Meta-Learning Algorithms|Dual use|[Pros and Cons](https://towardsai.net/p/machine-learning/why-choose-random-forest-and-not-decision-trees)|
 
 # Fairness Fundamentals
 #### What is fairness?
@@ -1002,6 +1001,3 @@ This kind of test is useful to detect errors that don’t raise exceptions, for 
 [Source: Load/Stress Tests](https://loadninja.com/resources/articles/performance-testing/load-stress-testing/)
 
 [Source: Differential Tests](https://blog.netcetera.com/testing-and-monitoring-machine-learning-model-deployments-ca878d93e518)
-
-# Acknowledgement
-Many thanks to my Machine Learning professor for the amazing slides from our classroom. It was a great help in my revision.
