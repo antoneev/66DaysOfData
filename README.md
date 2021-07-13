@@ -13,6 +13,7 @@ Each project I complete will be added into this repo into a separate folder.
 |Caption Suggestion for Photos using Lyrics| Complete | [App](https://share.streamlit.io/antoneev/66daysofdata/main/captionSuggestionsUsingLyrics/app.py) |[GitHub](https://github.com/antoneev/66DaysOfData/tree/main/captionSuggestionsUsingLyrics)
 |Article Assistance| Complete | [App](https://share.streamlit.io/antoneev/66daysofdata/main/articleAssistance/app.py) | [GitHub](https://github.com/antoneev/66DaysOfData/tree/main/articleAssistance)
 |Fundamentals Cheat Sheet| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/Fundamentals)
+|Too Hot To Handle Analysis| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/TooHotToHandle)
 
 ## Learn More
 Learn more about Ken Jee's #66DaysOfData [Learn More](https://www.youtube.com/watch?v=qV_AlRwhI3I&t=308s)
