@@ -37,11 +37,14 @@ def main(image_file,numberOfColors,artistName,numberOfSongs):
         print("No Objects Detected")
 
     # Adding similar words to a list then the list to overall list
-    similarWordSuggestion.main()  # Calling similar word suggestion
-    for key, value in similarWordSuggestion.allSimilarWords.items():
-        for i in range(len(value)):
-            similarWords.append(value[i])
-    AllItems.append(similarWords)
+    if len(objectDetection.ListofObjects) > 0:
+        similarWordSuggestion.main()  # Calling similar word suggestion
+        for key, value in similarWordSuggestion.allSimilarWords.items():
+            for i in range(len(value)):
+                similarWords.append(value[i])
+        AllItems.append(similarWords)
+    else:
+        print("Similar Word Suggestion not ran")
 
     print('All colors and objects found: ' + str(AllItems)) # Displaying color and objects
 

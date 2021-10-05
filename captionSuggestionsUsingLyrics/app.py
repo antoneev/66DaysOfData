@@ -6,7 +6,6 @@ import objectDetection
 import main as backend
 import os
 import loadingFiles
-
 # Upload image
 import similarWordSuggestion
 

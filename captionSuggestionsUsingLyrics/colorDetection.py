@@ -50,6 +50,7 @@ def recognize_color(color_index):
     minimum = 10000
     for i in range(len(csv)):
         d = abs(R- int(csv.loc[i,"R"])) + abs(G- int(csv.loc[i,"G"]))+ abs(B- int(csv.loc[i,"B"]))
+        print(R,int(csv.loc[i,"R"]))
         if(d<=minimum):
             minimum = d
             cname = csv.loc[i,"color_name"]
@@ -79,17 +80,11 @@ def main(img):
     dim = (500, 300)
     img = cv.resize(img, dim, interpolation=cv.INTER_AREA)
 
-    # Define KNN
+    # Define KMeans
     clt = KMeans(n_clusters=numberOfClusters)
-    clt.fit(img.reshape(-1, 3))
-    clt.labels_
-    clt.cluster_centers_
-
-    # Display color palette
     clt_1 = clt.fit(img.reshape(-1, 3))
-    compare_img(img, palette(clt_1))
-    # print(palette(clt_1))
 
+    compare_img(img, palette(clt_1)) # Calls display color palette
     ListofColors = all_colors_in_img(palette(clt_1)) # Calls all_colors_in_img function
     unique_rows = np.unique(ListofColors, axis=0) # Finds the unique arrays in the list
     photoColors = predict_color(unique_rows) # Calls predict_color which also calls recognize_color
