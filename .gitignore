@@ -1,1 +1,8 @@
 .DS_Store
+.ipynb_checkpoints/*
+Fundamentals/.idea/*
+TooHotToHandle/.idea/*
+PySpark Hello World/.ipynb_checkpoints/*
+Fundamentals/Notebooks/.ipynb_checkpoints/*
+PySparkHelloWorld/.ipynb_checkpoints/*
+RecommendationSystem/*
