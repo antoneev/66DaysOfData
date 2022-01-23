@@ -14,6 +14,9 @@ Each project I complete will be added into this repo into a separate folder.
 | 1 |Article Assistance| Complete | [App](https://share.streamlit.io/antoneev/66daysofdata/main/articleAssistance/app.py) | [GitHub](https://github.com/antoneev/66DaysOfData/tree/main/articleAssistance)
 | 1 |Fundamentals Cheat Sheet| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/Fundamentals)
 | 1 |Too Hot To Handle Analysis| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/TooHotToHandle)
+| 2 |PySpark| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/PySparkHelloWorld)
+| 2 |Good vs. Bad Movie Review (Machine Learning)| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/GoodvsBadMovieReview)
+| 2 |Good vs. Bad Movie Review (Deep Learning)| Complete | No App | [Readme](https://github.com/antoneev/66DaysOfData/tree/main/GoodvsBadMovieReview)
 
 ## Learn More
 Learn more about Ken Jee's #66DaysOfData [Learn More](https://www.youtube.com/watch?v=qV_AlRwhI3I&t=308s)
